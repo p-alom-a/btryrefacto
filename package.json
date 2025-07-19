@@ -1,0 +1,32 @@
+{
+  "name": "btry-nextjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@types/node": "^24.0.14",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "framer-motion": "^12.23.6",
+    "gsap": "^3.13.0",
+    "next": "^14.2.30",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.60.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.31.0",
+    "eslint-config-next": "^15.4.1"
+  }
+}
