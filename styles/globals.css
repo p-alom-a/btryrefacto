@@ -667,7 +667,7 @@ nav a:hover {
 .full-container-mission {
   display: flex;
   padding: 0 50px;
-  gap: 3em;
+  gap: 7em;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -685,9 +685,8 @@ nav a:hover {
 
 .img-mission {
   width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: var(--border-radius-card);
+  height: auto;
+  object-fit: contain;
 }
 
 .right-mission {
@@ -731,8 +730,8 @@ nav a:hover {
 }
 
 .accordion-title img {
-  width: 40px;
-  height: 40px;
+  width: 55px;
+  height: 55px;
 }
 
 .accordion-title h2 {
@@ -756,20 +755,32 @@ nav a:hover {
   transition: all 0.3s ease;
 }
 
+.plus-icon {
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .plus-icon {
+  transform: rotate(180deg);
+}
+
 .accordion-button:hover {
   background-color: var(--color-secondary);
   color: white;
 }
 
 .accordion-content {
-  padding: 1.5em;
-  display: none;
+  padding: 0 1.5em;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
   line-height: 1.6;
   color: #666;
 }
 
 .accordion-content.active {
-  display: block;
+  max-height: 500px;
+  padding: 1.5em;
+  transition: max-height 0.3s ease-in, padding 0.3s ease-in;
 }
 
 .bold-emphasis {
@@ -796,7 +807,6 @@ nav a:hover {
 
 /* Modal */
 .modal {
-  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -805,16 +815,19 @@ nav a:hover {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-content {
   background-color: white;
   margin: 5% auto;
-  padding: 2em;
-  border-radius: var(--border-radius-card);
-  width: 90%;
-  max-width: 1000px;
-  max-height: 80vh;
+  padding: 40px;
+  border-radius: 10px;
+  width: 98%;
+  max-width: 1600px;
+  max-height: 90vh;
   overflow-y: auto;
   position: relative;
 }
@@ -835,10 +848,10 @@ nav a:hover {
 
 .close {
   color: #aaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  line-height: 1;
 }
 
 .close:hover {
@@ -846,21 +859,31 @@ nav a:hover {
 }
 
 .container-solutions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-direction: row;
   gap: 2em;
+}
+
+@media (max-width: 768px) {
+  .container-solutions {
+    flex-direction: column;
+  }
 }
 
 .bloc {
   background-color: var(--color-bg-light);
   padding: 2em;
-  border-radius: var(--border-radius-card);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .bloc h2 {
   color: var(--color-primary);
-  margin-bottom: 1em;
-  font-size: 1.3em;
+  margin-bottom: 1.5em;
+  font-size: 1.4em;
+  line-height: 1.3;
 }
 
 .number-mission {
@@ -870,10 +893,18 @@ nav a:hover {
 
 .img-solutions {
   width: 100%;
-  height: 200px;
+  height: auto;
+  max-width: 100%;
   object-fit: cover;
-  border-radius: var(--border-radius-card);
-  margin-bottom: 1em;
+  border-radius: 5px 5px 5px 45px;
+  margin-bottom: 1.5em;
+  flex-shrink: 0;
+}
+
+.bloc p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
 }
 
 /* ------------------------------------------

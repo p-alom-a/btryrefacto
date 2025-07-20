@@ -35,14 +35,14 @@ export default function Missions() {
         <div className="right-mission">
           <div className="accordion">
             {/* Mission 1 */}
-            <div className="accordion-item" id="assistance-aexploitation">
+            <div className={`accordion-item ${activeAccordion === 'assistance' ? 'active' : ''}`} id="assistance-aexploitation">
               <div className="accordion-header" onClick={() => toggleAccordion('assistance')}>
                 <div className="accordion-title">
                   <Image
                     src="/images/picto_assistance_exploitaton.png"
                     alt="icone assistance à exploitation"
-                    width={40}
-                    height={40}
+                    width={55}
+                    height={55}
                   />
                   <h2>Assistance à exploitation</h2>
                 </div>
@@ -58,20 +58,20 @@ export default function Missions() {
                   Aussi, les experts btry vous conseillent afin de <span className="bold-emphasis">gérer et d'optimiser l'exploitation de vos bâtiments</span> avec des <span className="bold-emphasis">reporting (KPI)</span> et des <span className="bold-emphasis">plans d'actions simples</span>.
                 </p>
                 <button className="btn-missions-savoir" onClick={openModal}>
-                  Découvrez nos solutions
+                  Découvrez nos missions
                 </button>
               </div>
             </div>
 
             {/* Mission 2 */}
-            <div className="accordion-item" id="AMO">
+            <div className={`accordion-item ${activeAccordion === 'AMO' ? 'active' : ''}`} id="AMO">
               <div className="accordion-header" onClick={() => toggleAccordion('AMO')}>
                 <div className="accordion-title">
                   <Image
                     src="/images/picto-assistance-maitrise.png"
                     alt="icone assistance à maîtrise d'ouvrage"
-                    width={40}
-                    height={40}
+                    width={55}
+                    height={55}
                   />
                   <h2>Assistance à maîtrise d'ouvrage technique</h2>
                 </div>
@@ -90,14 +90,14 @@ export default function Missions() {
             </div>
 
             {/* Mission 3 */}
-            <div className="accordion-item" id="audit-diagno">
+            <div className={`accordion-item ${activeAccordion === 'audit' ? 'active' : ''}`} id="audit-diagno">
               <div className="accordion-header" onClick={() => toggleAccordion('audit')}>
                 <div className="accordion-title">
                   <Image
                     src="/images/picto-audit.png"
                     alt="icone audit et diagnostic"
-                    width={40}
-                    height={40}
+                    width={55}
+                    height={55}
                   />
                   <h2>Audit et diagnostic</h2>
                 </div>
@@ -116,14 +116,14 @@ export default function Missions() {
             </div>
 
             {/* Mission 4 */}
-            <div className="accordion-item" id="coordination-ssi">
+            <div className={`accordion-item ${activeAccordion === 'coordination' ? 'active' : ''}`} id="coordination-ssi">
               <div className="accordion-header" onClick={() => toggleAccordion('coordination')}>
                 <div className="accordion-title">
                   <Image
                     src="/images/picto_flamme.png"
                     alt="icone coordination SSI"
-                    width={40}
-                    height={40}
+                    width={55}
+                    height={55}
                   />
                   <h2>Coordination SSI</h2>
                 </div>
@@ -139,14 +139,14 @@ export default function Missions() {
             </div>
 
             {/* Mission 5 */}
-            <div className="accordion-item" id="delegationresponsabilites">
+            <div className={`accordion-item ${activeAccordion === 'delegation' ? 'active' : ''}`} id="delegationresponsabilites">
               <div className="accordion-header" onClick={() => toggleAccordion('delegation')}>
                 <div className="accordion-title">
                   <Image
                     src="/images/picto-delegation-reponsa.png"
                     alt="icone délégation des responsabilités"
-                    width={40}
-                    height={40}
+                    width={55}
+                    height={55}
                   />
                   <h2>Délégation des responsabilités</h2>
                 </div>
@@ -174,11 +174,9 @@ export default function Missions() {
             </div>
             <div className="container-solutions">
               <div className="bloc">
-                <Image
+                <img
                   src="/images/charge_affaire.webp"
                   alt="chargé d'affaire Btry dirigeant la mise en conformité SSI et la gestion des risques incendie"
-                  width={300}
-                  height={200}
                   className="img-solutions"
                 />
                 <h2><span className="number-mission">01.</span>Libérez-vous de vos contraintes techniques avec btry.</h2>
@@ -189,11 +187,9 @@ export default function Missions() {
               </div>
 
               <div className="bloc">
-                <Image
-                  src="/images/des solutions sur mesure-2.webp"
-                  alt="pompiers utilise la fiche d'intervention rapide SSI incendie"
-                  width={300}
-                  height={200}
+                <img
+                  src="/images/des%20solutions%20sur%20mesure-2.webp"
+                  alt="solutions sur mesure pour répondre aux besoins spécifiques"
                   className="img-solutions"
                 />
                 <h2><span className="number-mission">02.</span>Des solutions sur-mesure pour répondre à vos besoins spécifiques</h2>
@@ -202,15 +198,13 @@ export default function Missions() {
               </div>
 
               <div className="bloc">
-                <Image
-                  src="/images/pompier-2.webp"
+                <img
+                  src="/images/pompier-3.webp"
                   alt="pompiers utilise la fiche d'intervention rapide SSI incendie"
-                  width={300}
-                  height={200}
                   className="img-solutions"
                 />
                 <h2>
-                  <span className="number-mission">03.</span>Facilitez l'intervention des secours dans votre établissement <br /> avec la FIRE <sup><Image src="/images/logo_fire-2.webp" alt="Icone" width={19} height={19} style={{display: 'inline'}} /></sup>
+                  <span className="number-mission">03.</span>Facilitez l'intervention des secours dans votre établissement avec la FIRE <sup><Image src="/images/logo_fire-3.webp" alt="Icone" width={19} height={19} style={{display: 'inline'}} /></sup>
                 </h2>
                 <p>Développée par le SDIS 76, la Fiche d'Intervention Rapide Etablissement (FIRE) permet aux sapeurs-pompiers d'identifier rapidement vos points sensibles pour intervenir efficacement et en sécurité.
                   <br />La FIRE est stockées dans un dispositif la protégeant des intempéries et facilement identifiable pour les sapeurs-pompiers. 
