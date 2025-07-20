@@ -1,11 +1,41 @@
 'use client'
 
 import Image from 'next/image'
+import { useEffect, useRef } from 'react'
 
 export default function LinkedIn() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
   const openLinkedInPost = (url: string) => {
     window.open(url, '_blank')
   }
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {
+            // Autoplay failed, user interaction required
+          })
+        } else {
+          video.pause()
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.5
+    })
+
+    observer.observe(video)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
 
   return (
     <section className="linkedin-posts" id="linkedin">
@@ -84,7 +114,15 @@ export default function LinkedIn() {
             </div>
             
             <div className="post-video-container">
-              <video className="post-video" controls preload="metadata" muted loop playsInline>
+              <video 
+                ref={videoRef}
+                className="post-video" 
+                controls 
+                preload="metadata" 
+                muted 
+                loop 
+                playsInline
+              >
                 <source src="/images/videoLinkedin.mp4" type="video/mp4" />
                 Votre navigateur ne supporte pas la lecture de vidéos.
               </video>
