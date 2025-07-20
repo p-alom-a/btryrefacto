@@ -30,54 +30,43 @@ export default function Hero() {
     const CONFIG = {
       breakpoints: {
         mobile: 768
-      },
-      animations: {
-        duration: {
-          fast: 0.3,
-          normal: 0.8,
-          slow: 1.2,
-          extraSlow: 1.8
-        },
-        easing: {
-          smooth: "power2.out",
-          sharp: "power2.in",
-          elastic: "back.out(1.7)"
-        }
       }
     }
 
-    // Hero entrance animations
+    // États initiaux pour les éléments Hero (comme dans l'original)
     gsap.set(".logo-btry-solution", { opacity: 0, y: 20 })
-    gsap.set(".paragraphe-accroche-hero", { opacity: 0, y: 10 })
+    gsap.set(".paragraphe-accroche-hero", { opacity: 0, y: 20 })
     gsap.set(".etiquette", { opacity: 0 })
     gsap.set(".img-hero", { opacity: 0 })
 
+    // Animation Hero Timeline - reproduction exacte
     const heroTimeline = gsap.timeline({ delay: 0.2 })
     
     heroTimeline
       .to(".logo-btry-solution", { 
         opacity: 1, 
         y: 0, 
-        duration: CONFIG.animations.duration.normal, 
-        ease: CONFIG.animations.easing.smooth 
+        duration: 1, 
+        ease: "power2.out"
       })
       .to(".paragraphe-accroche-hero", { 
         opacity: 1, 
         y: 0, 
-        duration: CONFIG.animations.duration.normal, 
-        ease: CONFIG.animations.easing.smooth 
+        duration: 0.8, 
+        ease: "power2.out"
       }, "-=0.3")
       .to(".etiquette", { 
         opacity: 1, 
-        duration: CONFIG.animations.duration.normal, 
-        stagger: 0.15, 
-        ease: CONFIG.animations.easing.smooth 
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out"
       }, "-=0.4")
       .to(".img-hero", { 
         opacity: 1, 
-        duration: CONFIG.animations.duration.slow, 
-        ease: CONFIG.animations.easing.smooth 
-      }, "-=0.4")
+        duration: 1.2, 
+        ease: "power2.out"
+      }, "-=0.6")
+
 
     // Scroll-triggered animations for desktop
     if (window.innerWidth > CONFIG.breakpoints.mobile) {

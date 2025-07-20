@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import emailjs from '@emailjs/browser'
@@ -18,8 +18,101 @@ export default function Contact() {
   const [showPopup, setShowPopup] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const contactRef = useRef<HTMLElement>(null)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
+
+  useEffect(() => {
+    const linkedinSection = document.querySelector('.linkedin-posts')
+    if (!linkedinSection) return
+
+    // État initial : masquer tous les éléments de contact (comme dans GSAP)
+    const contactElements = document.querySelectorAll('.contact-heading, .btn-formulaire-contact .btn-mail, .btn-formulaire-contact .btn-appel, .contact-image, .contact-detail-container')
+    contactElements.forEach(el => {
+      const element = el as HTMLElement
+      element.style.opacity = '0'
+      element.style.transform = 'translateY(10px) scale(0.98)'
+    })
+
+    // État initial du border-right
+    const leftContainer = document.querySelector('.left-contact-container') as HTMLElement
+    if (leftContainer) {
+      leftContainer.style.borderRightWidth = '0px'
+      leftContainer.style.borderRightStyle = 'solid'
+      leftContainer.style.borderRightColor = 'white'
+    }
+
+    let hasTriggered = false
+
+    const handleScroll = () => {
+      const linkedinRect = linkedinSection.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+      
+      // Reproduction exacte: start: "bottom+=600 bottom"
+      // Cela signifie : quand le bottom de linkedin-posts est à 600px sous le bottom du viewport
+      const triggerStart = linkedinRect.bottom <= (viewportHeight - 600)
+      const triggerEnd = linkedinRect.bottom <= (viewportHeight - 800)
+      
+      if (triggerStart && !hasTriggered) {
+        hasTriggered = true
+        
+        // Animation onEnter - reproduction exacte du timeline GSAP
+        // 1. Background body + LinkedIn fade out
+        document.body.style.transition = 'background-color 0.6s ease'
+        document.body.style.backgroundColor = '#002768'
+        
+        const linkedinEl = linkedinSection as HTMLElement
+        linkedinEl.style.transition = 'opacity 0.6s ease'
+        linkedinEl.style.opacity = '0'
+        
+        // 2. Contact elements appear (avec délai de -0.1s comme dans GSAP)
+        setTimeout(() => {
+          contactElements.forEach(el => {
+            const element = el as HTMLElement
+            element.style.transition = 'all 1.2s ease'
+            element.style.opacity = '1'
+            element.style.transform = 'translateY(0) scale(1)'
+          })
+          
+          // 3. Border-right animation
+          if (leftContainer) {
+            leftContainer.style.transition = 'border-right-width 1.2s ease'
+            leftContainer.style.borderRightWidth = '2px'
+          }
+        }, 500) // Équivalent de "-=0.1" dans le timeline
+        
+      } else if (!triggerStart && hasTriggered) {
+        hasTriggered = false
+        
+        // Animation onLeaveBack - reproduction exacte
+        contactElements.forEach(el => {
+          const element = el as HTMLElement
+          element.style.transition = 'all 1s ease'
+          element.style.opacity = '0'
+          element.style.transform = 'translateY(10px) scale(0.98)'
+        })
+        
+        if (leftContainer) {
+          leftContainer.style.transition = 'border-right-width 1s ease'
+          leftContainer.style.borderRightWidth = '0px'
+        }
+        
+        setTimeout(() => {
+          document.body.style.backgroundColor = '#ffffff'
+          const linkedinEl = linkedinSection as HTMLElement
+          linkedinEl.style.opacity = '1'
+        }, 500)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Check initial state
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      document.body.style.backgroundColor = '#ffffff'
+    }
+  }, [])
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)
@@ -44,7 +137,7 @@ export default function Contact() {
   }
 
   return (
-    <section className="contact" id="cntct">
+    <section ref={contactRef} className="contact" id="cntct">
       <div className="contact-content">
         <div className="left-contact-container">
           <h4 className="contact-heading">Besoin d'expertise pour sécuriser et optimiser vos bâtiments ?</h4>

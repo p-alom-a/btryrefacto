@@ -18,19 +18,10 @@ export default function About() {
   useEffect(() => {
     if (!isMounted || typeof window === 'undefined') return
 
-    // Configuration
-    const CONFIG = {
-      animations: {
-        easing: {
-          smooth: "power2.out"
-        }
-      }
-    }
+    // États initiaux pour About section
+    gsap.set(".subcontainer-apropos", { opacity: 1, y: 0, scale: 1 })
 
-    // Animation "À propos" - Apparition fluide et progressive
-    gsap.set(".corps1.c-apropos", { opacity: 1, y: 0 }) // Visible par défaut
-    
-    // Animation subtile et professionnelle du texte "À propos"
+    // Animation subtile et professionnelle du texte "À propos" - reproduction exacte
     gsap.fromTo(".corps1.c-apropos", 
       { 
         opacity: 0,
@@ -46,14 +37,11 @@ export default function About() {
         opacity: 1,
         y: 0,
         duration: 1.2,
-        ease: CONFIG.animations.easing.smooth
+        ease: "power2.out"
       }
     )
 
-    // Animation des cartes complètes - Une après l'autre
-    gsap.set(".subcontainer-apropos", { opacity: 1, y: 0, scale: 1 }) // Visibles par défaut
-    
-    // Animation de chaque carte complète (carte + octogone) une après l'autre
+    // Animation des cartes complètes - Une après l'autre - reproduction exacte
     gsap.fromTo(".subcontainer-apropos", 
       { 
         opacity: 0, 
@@ -70,9 +58,9 @@ export default function About() {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 1,
-        ease: CONFIG.animations.easing.smooth,
-        stagger: 0.2 // Animation en cascade
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.3
       }
     )
 

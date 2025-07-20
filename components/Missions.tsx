@@ -1,7 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 export default function Missions() {
   const [activeAccordion, setActiveAccordion] = useState<string | null>(null)
@@ -9,7 +15,43 @@ export default function Missions() {
 
   const toggleAccordion = (id: string) => {
     setActiveAccordion(activeAccordion === id ? null : id)
+    
+    // Délai pour permettre à l'animation CSS de se terminer puis recalculer les ScrollTriggers
+    setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        ScrollTrigger.refresh()
+      }
+    }, 400) // Délai correspondant à la durée de l'animation CSS
   }
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    // États initiaux - s'assurer que les éléments sont visibles par défaut
+    gsap.set('.accordion-item', { opacity: 1 })
+
+    // Animation de la section missions - reproduction exacte
+    const missionItems = gsap.utils.toArray('.accordion-item') as Element[]
+    missionItems.forEach((item) => {
+      gsap.fromTo(item, 
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
+    })
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
+  }, [])
 
   const openModal = () => {
     setShowModal(true)
