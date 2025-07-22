@@ -113,7 +113,7 @@ export default function FormationHero() {
                 VAE
               </span>
               <button 
-                className="formation-etiquette rounded-[11px] px-[17px] py-[2px] font-normal text-base no-underline font-primary mr-4 mb-4 bg-blue-900 text-[#FAC457] border-none max-w-[300px] text-center box-border transition-all duration-300 cursor-pointer relative overflow-hidden opacity-0"
+                className="formation-etiquette rounded-[11px] px-[17px] py-[2px] font-normal text-base no-underline font-primary mr-4 mb-4 bg-[#FAC457] text-[#002768] border-none max-w-[300px] text-center box-border transition-all duration-300 cursor-pointer relative overflow-hidden opacity-0"
                 onClick={() => scrollToSection('formations')}
               >
                 +
