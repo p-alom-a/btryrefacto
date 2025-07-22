@@ -125,7 +125,7 @@ const ContactSection: React.FC = () => {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: styles }} />
-      <section ref={sectionRef} className="py-12 bg-blue-50">
+      <section id="contact" ref={sectionRef} className="py-12 bg-blue-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 lg:p-16">
             

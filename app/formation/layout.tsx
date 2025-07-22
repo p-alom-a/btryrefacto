@@ -1,9 +1,10 @@
 import './formation.css';
+import FormationHeader from './components/FormationHeader';
 
 export default function FormationLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="formation-layout">
-      {/* Ici tu pourras ajouter ta navbar formation commune */}
+    <div className="formation-layout min-h-screen">
+      <FormationHeader />
       {children}
     </div>
   );

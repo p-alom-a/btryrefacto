@@ -5,3 +5,23 @@
   /* Container principal pour toutes les pages formation */
   min-height: 100vh;
 }
+
+/* Support des fonts pour la section formation */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-primary {
+  font-family: var(--font-primary);  
+}
+
+.font-logo {
+  font-family: var(--font-logo);
+}
+
+/* Ajuster le style du header pour formation */
+.formation-layout header {
+  background-color: white;
+  position: static;
+  z-index: 100;
+}

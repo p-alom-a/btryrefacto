@@ -106,7 +106,7 @@ const FormationsSection: React.FC = () => {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: styles }} />
-      <section ref={sectionRef} className="py-12 bg-white overflow-hidden">
+      <section id="formations" ref={sectionRef} className="py-12 bg-white overflow-hidden">
         <div className="w-full px-4 lg:px-8">
           <div className="w-full">
             
@@ -120,6 +120,7 @@ const FormationsSection: React.FC = () => {
               {formations.map((formation, index) => (
                 <div 
                   key={`desktop-${index}`}
+                  id={index === 0 ? 'prevention-risques' : index === 1 ? 'bilan-competences' : 'formation-continue'}
                   ref={el => { desktopCardsRef.current[index] = el; }}
                   className="fade-in-up bg-blue-50 rounded-2xl p-12 hover:shadow-lg transition-all duration-300 flex flex-col h-full w-full"
                 >

@@ -109,7 +109,7 @@ const AboutSection: React.FC = () => {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: styles }} />
-      <section ref={sectionRef} className="py-12 bg-gray-50 overflow-hidden">
+      <section id="about" ref={sectionRef} className="py-12 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-12 lg:p-16">
           
