@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.btry.fr/sitemap.xml
+
+# Disallow specific paths if needed
+# Disallow: /admin
+# Disallow: /private
+
+# Crawl-delay for SEO bots (optional)
+Crawl-delay: 1

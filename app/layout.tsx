@@ -46,21 +46,30 @@ const comfortaa = Comfortaa({
 })
 
 export const metadata: Metadata = {
-  title: 'btry solutions | Bureau d\'Études en Sécurité Incendie et Optimisation des Bâtiments - France Métropole et Outre-Mer-SSI',
-  description: 'Btry Solutions est un bureau d\'étude spécialisé dans la sécurité incendie, l\'exploitation et l\'optimisation des bâtiments. - Audit diagnostic batiments - SSI incendie - ERP',
+  title: 'BTRY Solutions | Sécurité Incendie & Bâtiments - SSI ERP',
+  description: 'Expert sécurité incendie depuis 20 ans. Audit, diagnostic, SSI, exploitation ERP/IGH/ICPE. Métropole & Outre-Mer. ✅ Devis gratuit',
   keywords: 'sécurité incendie, gestion des bâtiments, bureau d\'études, ERP, IGH, ICPE, audit batiment, diagnostic batiment, assistance à maîtrise d\'ouvrage, exploitation bâtiments, SSI incendie',
   authors: [{ name: 'Btry Solutions' }],
+  robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   openGraph: {
-    title: 'Btry Solutions - Sécurité incendie et gestion des bâtiments',
-    description: 'Expert en sécurité incendie (ERP, IGH, ICPE, SSI incendie) avec plus de 20 ans d\'expérience. Nous offrons des services sur-mesure pour vos projets de construction, d\'extension, ou de gestion de bâtiments.',
+    title: 'BTRY Solutions - Expert Sécurité Incendie & Bâtiments',
+    description: 'Expert sécurité incendie depuis 20 ans. Services SSI, audit, diagnostic pour ERP/IGH/ICPE. Métropole & Outre-Mer. Devis gratuit sous 48h.',
     url: 'https://www.btry.fr',
     type: 'website',
     locale: 'fr_FR',
+    images: [
+      {
+        url: 'https://www.btry.fr/images/coverPicture.webp',
+        width: 1200,
+        height: 630,
+        alt: 'BTRY Solutions - Expert en sécurité incendie',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'btry Solutions - Sécurité incendie et gestion des bâtiments- SSI incendie',
-    description: 'Découvrez nos services spécialisés dans la sécurité incendie et l\'optimisation des bâtiments. SSI',
+    title: 'BTRY Solutions - Expert Sécurité Incendie & Bâtiments',
+    description: 'Expert sécurité incendie depuis 20 ans. Services SSI, audit, diagnostic. Métropole & Outre-Mer. Devis gratuit.',
   },
 }
 
@@ -77,6 +86,54 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "BTRY Solutions",
+              "alternateName": "btry",
+              "url": "https://www.btry.fr",
+              "logo": "https://www.btry.fr/images/btry-logo-2.png",
+              "description": "Bureau d'études spécialisé en sécurité incendie, exploitation et optimisation des bâtiments. Expert ERP, IGH, ICPE depuis 20 ans.",
+              "telephone": "+33684145398",
+              "email": "contact@btry.fr",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "FR",
+                "addressRegion": "France Métropole et Outre-Mer"
+              },
+              "areaServed": [
+                {
+                  "@type": "Country",
+                  "name": "France"
+                },
+                {
+                  "@type": "Place", 
+                  "name": "Outre-Mer français"
+                }
+              ],
+              "foundingDate": "2003",
+              "numberOfEmployees": "5-10",
+              "sameAs": [
+                "https://www.linkedin.com/company/btry-solutions/",
+                "https://wa.me/594694257718"
+              ],
+              "serviceType": [
+                "Sécurité incendie",
+                "Bureau d'études",
+                "Assistance à maîtrise d'ouvrage",
+                "Audit et diagnostic bâtiments",
+                "Coordination SSI",
+                "Exploitation ERP"
+              ],
+              "priceRange": "Sur devis",
+              "paymentAccepted": "Virement, Chèque",
+              "currenciesAccepted": "EUR"
+            })
+          }}
+        />
       </head>
       <body>
         {children}

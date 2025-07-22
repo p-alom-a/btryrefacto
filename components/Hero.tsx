@@ -163,11 +163,11 @@ export default function Hero() {
                   la gestion de vos bâtiments <br className="mobile-break" />avec notre expertise.
                 </h1>
                 <div className="container-etiquettes-hero">
-                  <h2 className="etiquette">Conception SSI</h2>
-                  <h2 className="etiquette">Conformité incendie</h2>
-                  <h2 className="etiquette">Solutions techniques</h2>
-                  <h2 className="etiquette">Exploitation ERP</h2>
-                  <h2 className="etiquette">+</h2>
+                  <span className="etiquette">Conception SSI</span>
+                  <span className="etiquette">Conformité incendie</span>
+                  <span className="etiquette">Solutions techniques</span>
+                  <span className="etiquette">Exploitation ERP</span>
+                  <span className="etiquette">+</span>
                 </div>
               </div>
             </div>
@@ -246,10 +246,10 @@ export default function Hero() {
                 la gestion de vos bâtiments <br className="mobile-break" />avec notre expertise.
               </h1>
               <div className="container-etiquettes-hero">
-                <h2 className="etiquette">Conception SSI</h2>
-                <h2 className="etiquette">Conformité incendie</h2>
-                <h2 className="etiquette">Solutions techniques</h2>
-                <h2 className="etiquette">Exploitation ERP</h2>
+                <span className="etiquette">Conception SSI</span>
+                <span className="etiquette">Conformité incendie</span>
+                <span className="etiquette">Solutions techniques</span>
+                <span className="etiquette">Exploitation ERP</span>
                 <button 
                   className="etiquette"
                   onClick={() => scrollToSection('mssns')}
