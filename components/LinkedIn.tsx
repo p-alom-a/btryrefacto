@@ -1,13 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
+import { useRef, useEffect } from 'react'
+import { createFadeInAnimation, useGSAP } from '@/hooks/useGSAP'
 
 export default function LinkedIn() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -43,58 +38,11 @@ export default function LinkedIn() {
     }
   }, [])
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    // États initiaux - s'assurer que les éléments sont visibles par défaut
-    gsap.set(".titre-section-linkedin, .subtitle-linkedin, .linkedin-follow-btn, .linkedin-post", { opacity: 1 })
-
-    // LinkedIn section animations - reproduction exacte
-    let linkedinTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".linkedin-posts",
-        start: "top 95%",
-        toggleActions: "play none none none"
-      }
-    })
-
-    linkedinTl
-      .fromTo(".titre-section-linkedin", 
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-      )
-      .fromTo(".subtitle-linkedin", 
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 
-        "-=0.3"
-      )
-      .fromTo(".linkedin-follow-btn", 
-        { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 
-        "-=0.2"
-      )
-
-    // Posts animation - reproduction exacte
-    gsap.fromTo(".linkedin-post", 
-      { opacity: 0, y: 20 },
-      {
-        scrollTrigger: {
-          trigger: ".posts-grid",
-          start: "top 95%",
-          toggleActions: "play none none none"
-        },
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.2
-      }
-    )
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-    }
-  }, [])
+  // Animations fade-in simples pour LinkedIn
+  useGSAP(createFadeInAnimation('.titre-section-linkedin'), [])
+  useGSAP(createFadeInAnimation('.subtitle-linkedin', 0.1), [])  
+  useGSAP(createFadeInAnimation('.linkedin-follow-btn', 0.2), [])
+  useGSAP(createFadeInAnimation('.linkedin-post', 0.1), [])
 
   return (
     <section className="linkedin-posts" id="linkedin">

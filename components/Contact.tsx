@@ -1,9 +1,17 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import emailjs from '@emailjs/browser'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@/hooks/useGSAP'
+
+// Register ScrollTrigger
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 interface FormData {
   name: string
@@ -22,95 +30,84 @@ export default function Contact() {
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
 
-  useEffect(() => {
+  // Animation GSAP propre - Background bleu + éléments contact + border
+  useGSAP(() => {
     const linkedinSection = document.querySelector('.linkedin-posts')
+    const leftContainer = document.querySelector('.left-contact-container') as HTMLElement
+    const contactElements = document.querySelectorAll('.contact-heading, .btn-formulaire-contact .btn-mail, .btn-formulaire-contact .btn-appel, .contact-image, .contact-detail-container')
+    
     if (!linkedinSection) return
 
-    // État initial : masquer tous les éléments de contact (comme dans GSAP)
-    const contactElements = document.querySelectorAll('.contact-heading, .btn-formulaire-contact .btn-mail, .btn-formulaire-contact .btn-appel, .contact-image, .contact-detail-container')
-    contactElements.forEach(el => {
-      const element = el as HTMLElement
-      element.style.opacity = '0'
-      element.style.transform = 'translateY(10px) scale(0.98)'
-    })
-
-    // État initial du border-right
-    const leftContainer = document.querySelector('.left-contact-container') as HTMLElement
+    // États initiaux pour les éléments contact et border
+    gsap.set(contactElements, { opacity: 0, y: 20, scale: 0.95 })
     if (leftContainer) {
-      leftContainer.style.borderRightWidth = '0px'
-      leftContainer.style.borderRightStyle = 'solid'
-      leftContainer.style.borderRightColor = 'white'
+      gsap.set(leftContainer, { borderRightWidth: "0px", borderRightStyle: "solid", borderRightColor: "white" })
     }
 
-    let hasTriggered = false
-
-    const handleScroll = () => {
-      const linkedinRect = linkedinSection.getBoundingClientRect()
-      const viewportHeight = window.innerHeight
-      
-      // Reproduction exacte: start: "bottom+=600 bottom"
-      // Cela signifie : quand le bottom de linkedin-posts est à 600px sous le bottom du viewport
-      const triggerStart = linkedinRect.bottom <= (viewportHeight - 600)
-      const triggerEnd = linkedinRect.bottom <= (viewportHeight - 800)
-      
-      if (triggerStart && !hasTriggered) {
-        hasTriggered = true
-        
-        // Animation onEnter - reproduction exacte du timeline GSAP
-        // 1. Background body + LinkedIn fade out
-        document.body.style.transition = 'background-color 0.6s ease'
-        document.body.style.backgroundColor = '#002768'
-        
-        const linkedinEl = linkedinSection as HTMLElement
-        linkedinEl.style.transition = 'opacity 0.6s ease'
-        linkedinEl.style.opacity = '0'
-        
-        // 2. Contact elements appear (avec délai de -0.1s comme dans GSAP)
-        setTimeout(() => {
-          contactElements.forEach(el => {
-            const element = el as HTMLElement
-            element.style.transition = 'all 1.2s ease'
-            element.style.opacity = '1'
-            element.style.transform = 'translateY(0) scale(1)'
+    // Animation avec GSAP pur et ScrollTrigger optimisé
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: linkedinSection,
+        start: "bottom+=600 bottom",
+        end: "bottom+=800 bottom", 
+        toggleActions: "play none none reverse",
+        onEnter: () => {
+          // L'effet signature : Background bleu + LinkedIn fade out
+          gsap.to("body", { backgroundColor: "#002768", duration: 0.6, ease: "power2.out" })
+          gsap.to(linkedinSection, { opacity: 0, duration: 0.6, ease: "power2.out" })
+          
+          // Apparition des éléments contact avec délai
+          gsap.to(contactElements, { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1, 
+            duration: 1.2, 
+            ease: "power2.out", 
+            delay: 0.5,
+            stagger: 0.1 
           })
           
-          // 3. Border-right animation
+          // Animation de la border-right
           if (leftContainer) {
-            leftContainer.style.transition = 'border-right-width 1.2s ease'
-            leftContainer.style.borderRightWidth = '2px'
+            gsap.to(leftContainer, { 
+              borderRightWidth: "2px", 
+              duration: 1.2, 
+              ease: "power2.out", 
+              delay: 0.7 
+            })
           }
-        }, 500) // Équivalent de "-=0.1" dans le timeline
-        
-      } else if (!triggerStart && hasTriggered) {
-        hasTriggered = false
-        
-        // Animation onLeaveBack - reproduction exacte
-        contactElements.forEach(el => {
-          const element = el as HTMLElement
-          element.style.transition = 'all 1s ease'
-          element.style.opacity = '0'
-          element.style.transform = 'translateY(10px) scale(0.98)'
-        })
-        
-        if (leftContainer) {
-          leftContainer.style.transition = 'border-right-width 1s ease'
-          leftContainer.style.borderRightWidth = '0px'
+        },
+        onLeaveBack: () => {
+          // Retour background blanc et masquage des éléments
+          gsap.to("body", { backgroundColor: "#ffffff", duration: 0.6, ease: "power2.out" })
+          gsap.to(linkedinSection, { opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.3 })
+          
+          // Masquer les éléments contact
+          gsap.to(contactElements, { 
+            opacity: 0, 
+            y: 20, 
+            scale: 0.95, 
+            duration: 1, 
+            ease: "power2.out" 
+          })
+          
+          // Masquer la border
+          if (leftContainer) {
+            gsap.to(leftContainer, { 
+              borderRightWidth: "0px", 
+              duration: 1, 
+              ease: "power2.out" 
+            })
+          }
         }
-        
-        setTimeout(() => {
-          document.body.style.backgroundColor = '#ffffff'
-          const linkedinEl = linkedinSection as HTMLElement
-          linkedinEl.style.opacity = '1'
-        }, 500)
       }
-    }
+    })
 
-    window.addEventListener('scroll', handleScroll)
-    handleScroll() // Check initial state
-
+    // Cleanup function
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      document.body.style.backgroundColor = '#ffffff'
+      tl.kill()
+      // Reset background on unmount
+      gsap.set("body", { backgroundColor: "#ffffff" })
     }
   }, [])
 

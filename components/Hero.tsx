@@ -1,13 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
+import { useGSAP } from '@/hooks/useGSAP'
 
 export default function Hero() {
   const [isMounted, setIsMounted] = useState(false)
@@ -19,31 +15,26 @@ export default function Hero() {
     }
   }
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  // Animation d'entrée simple et propre
+  useGSAP(() => {
+    // États initiaux - forcer l'invisibilité
+    gsap.set([".logo-btry-solution", ".paragraphe-accroche-hero"], { opacity: 0, y: 30 })
+    gsap.set(".etiquette:not(:last-child)", { opacity: 0, scale: 0.9 }) // Toutes les étiquettes sauf le +
+    gsap.set(".etiquette:last-child", { opacity: 0, scale: 0.8, force3D: true }) // Le bouton + avec force
+    gsap.set(".contact-btn", { opacity: 0, scale: 0.8 })
+    gsap.set(".img-hero", { opacity: 0, scale: 0.95 })
 
-  useEffect(() => {
-    if (!isMounted || typeof window === 'undefined') return
-
-    // Configuration
-    const CONFIG = {
-      breakpoints: {
-        mobile: 768
-      }
+    // Forcer l'invisibilité du bouton + via CSS aussi
+    const plusButton = document.querySelector(".etiquette:last-child") as HTMLElement
+    if (plusButton) {
+      plusButton.style.opacity = "0"
+      plusButton.style.transform = "scale(0.8)"
     }
 
-    // États initiaux pour les éléments Hero (comme dans l'original)
-    gsap.set(".logo-btry-solution", { opacity: 0, y: 20 })
-    gsap.set(".paragraphe-accroche-hero", { opacity: 0, y: 20 })
-    gsap.set(".etiquette", { opacity: 0 })
-    gsap.set(".img-hero", { opacity: 0 })
-
-    // Animation Hero Timeline - reproduction exacte
-    const heroTimeline = gsap.timeline({ delay: 0.2 })
+    // Timeline d'entrée propre
+    const tl = gsap.timeline({ delay: 0.3 })
     
-    heroTimeline
-      .to(".logo-btry-solution", { 
+    tl.to(".logo-btry-solution", { 
         opacity: 1, 
         y: 0, 
         duration: 1, 
@@ -54,57 +45,39 @@ export default function Hero() {
         y: 0, 
         duration: 0.8, 
         ease: "power2.out"
-      }, "-=0.3")
-      .to(".etiquette", { 
+      }, "-=0.5")
+      .to(".etiquette:not(:last-child)", { 
         opacity: 1, 
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out"
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "back.out(1.7)"
       }, "-=0.4")
+      .to(".etiquette:last-child", { 
+        opacity: 1, 
+        scale: 1,
+        duration: 0.5,
+        ease: "back.out(1.7)"
+      }, "-=0.1")
+      .to(".contact-btn", { 
+        opacity: 1, 
+        scale: 1,
+        duration: 0.5,
+        ease: "back.out(1.7)"
+      }, "-=0.3")
       .to(".img-hero", { 
         opacity: 1, 
-        duration: 1.2, 
+        scale: 1,
+        duration: 1, 
         ease: "power2.out"
       }, "-=0.6")
 
-
-    // Scroll-triggered animations for desktop
-    if (window.innerWidth > CONFIG.breakpoints.mobile) {
-      gsap.to(".img-hero", {
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true
-        },
-        y: -50,
-        ease: "none"
-      })
-
-      gsap.to(".img-hero, .etiquette, .paragraphe-accroche-hero", {
-        scrollTrigger: {
-          trigger: ".top",
-          start: "bottom 60%",
-          end: "bottom 40%",
-          toggleActions: "play none none reverse",
-          onEnter: () => {
-            gsap.to(".img-hero", { opacity: 0, duration: 1.2, ease: "power2.out" })
-            gsap.to(".etiquette", { opacity: 0, y: -20, duration: 1, ease: "power2.out" })
-            gsap.to(".paragraphe-accroche-hero", { opacity: 0, y: -15, duration: 1.1, ease: "power2.out" })
-          },
-          onLeaveBack: () => {
-            gsap.to(".img-hero", { opacity: 1, duration: 1.2, ease: "power2.out" })
-            gsap.to(".etiquette", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
-            gsap.to(".paragraphe-accroche-hero", { opacity: 1, y: 0, duration: 1.1, ease: "power2.out" })
-          }
-        }
-      })
-    }
+    setIsMounted(true)
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      tl.kill()
     }
-  }, [isMounted])
+  }, [])
 
   if (!isMounted) {
     return (

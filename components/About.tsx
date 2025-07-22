@@ -1,73 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
+import { createFadeInAnimation, createStaggeredAnimation, useGSAP } from '@/hooks/useGSAP'
 
 export default function About() {
-  const [isMounted, setIsMounted] = useState(false)
+  // Animation du texte principal
+  useGSAP(createFadeInAnimation('.corps1.c-apropos'), [])
+  
+  // Animation des cartes une par une avec stagger
+  useGSAP(createStaggeredAnimation('.subcontainer-apropos', 0.3), [])
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!isMounted || typeof window === 'undefined') return
-
-    // États initiaux pour About section
-    gsap.set(".subcontainer-apropos", { opacity: 1, y: 0, scale: 1 })
-
-    // Animation subtile et professionnelle du texte "À propos" - reproduction exacte
-    gsap.fromTo(".corps1.c-apropos", 
-      { 
-        opacity: 0,
-        y: 20
-      },
-      {
-        scrollTrigger: {
-          trigger: ".corps1.c-apropos",
-          start: "top 75%",
-          toggleActions: "play none none none",
-          markers: false
-        },
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "power2.out"
-      }
-    )
-
-    // Animation des cartes complètes - Une après l'autre - reproduction exacte
-    gsap.fromTo(".subcontainer-apropos", 
-      { 
-        opacity: 0, 
-        y: 30, 
-        scale: 0.95 
-      },
-      {
-        scrollTrigger: {
-          trigger: ".container-apropos",
-          start: "top 70%",
-          toggleActions: "play none none none",
-          markers: false
-        },
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: "power2.out",
-        stagger: 0.3
-      }
-    )
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-    }
-  }, [isMounted])
   return (
     <section className="apropos" id="about">
       <div className="entete-apropos-container">
