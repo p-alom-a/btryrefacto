@@ -3,16 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Send, User, Mail, Phone, MessageSquare } from 'lucide-react';
 
-interface FormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  company: string;
-  formation: string;
-  message: string;
-}
-
 const styles = `
   .fade-in-up {
     opacity: 0;
@@ -48,6 +38,16 @@ const styles = `
   }
 `;
 
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  company: string;
+  formation: string;
+  message: string;
+}
+
 const ContactSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -72,7 +72,7 @@ const ContactSection: React.FC = () => {
     'Autre'
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,

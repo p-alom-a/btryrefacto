@@ -3,13 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Plus, Minus } from 'lucide-react';
 
-interface Formation {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-}
-
 const styles = `
   .fade-in-up {
     opacity: 0;
@@ -41,7 +34,7 @@ const FormationsSection: React.FC = () => {
   const hasAnimated = useRef(false);
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
 
-  const formations: Formation[] = [
+  const formations = [
     {
       title: "Prévention des risques",
       description: "Formations en sécurité, gestes et postures, premiers secours pour assurer la protection au travail.",

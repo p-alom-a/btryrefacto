@@ -1,5 +1,6 @@
 'use client'
 
+import '../styles/homepage.css'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Missions from '@/components/Missions'
