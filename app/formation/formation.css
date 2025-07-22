@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+/* Styles spécifiques à la section formation */
+.formation-layout {
+  /* Container principal pour toutes les pages formation */
+  min-height: 100vh;
+}

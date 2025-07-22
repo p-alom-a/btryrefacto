@@ -112,7 +112,7 @@ export default function Hero() {
         <header>
           <div className="logo">
             <Image
-              src="/images/btry-logo-2.png"
+              src="/images/btry-logo-2-2.png"
               alt="btry logo"
               width={120}
               height={60}
@@ -151,7 +151,7 @@ export default function Hero() {
               <div className="text-accroche-container">
                 <div className="btrySolution">
                   <Image
-                    src="/images/btry_solution.png"
+                    src="/images/btry_solution-2.png"
                     alt="logo btry solutions"
                     width={200}
                     height={80}
@@ -190,7 +190,7 @@ export default function Hero() {
       <header>
         <div className="logo">
           <Image
-            src="/images/btry-logo-2.png"
+            src="/images/btry-logo-2-2.png"
             alt="btry logo"
             width={120}
             height={60}
@@ -234,7 +234,7 @@ export default function Hero() {
             <div className="text-accroche-container">
               <div className="btrySolution">
                 <Image
-                  src="/images/btry_solution.png"
+                  src="/images/btry_solution-2.png"
                   alt="logo btry solutions"
                   width={200}
                   height={80}

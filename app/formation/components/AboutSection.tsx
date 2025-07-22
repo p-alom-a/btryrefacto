@@ -131,7 +131,7 @@ const AboutSection: React.FC = () => {
               <div ref={imageRef} className="fade-in-right lg:justify-self-end">
                 <div className="relative max-w-lg h-full flex items-start">
                   <img 
-                    src="/images/formation/illustration-apropos.png" 
+                    src="/images/formation/illustration-apropos.jpg" 
                     alt="Formation professionnelle" 
                     className="rounded-3xl shadow-xl w-full h-full object-cover"
                   />

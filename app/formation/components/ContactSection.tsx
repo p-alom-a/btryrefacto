@@ -271,7 +271,7 @@ const ContactSection: React.FC = () => {
               <div ref={imageRef} className="fade-in-right">
                 <div className="relative h-full">
                   <img 
-                    src="/images/formation/illustration-contact.png" 
+                    src="/images/formation/illustration-contact.jpg" 
                     alt="Équipe btry formation" 
                     className="w-full h-full object-cover rounded-2xl shadow-xl"
                   />
