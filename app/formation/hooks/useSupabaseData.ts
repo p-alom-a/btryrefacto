@@ -71,7 +71,7 @@ export const useSupabaseData = (category: string) => {
           throw error;
         }
 
-        setCourses(data || []);
+        setCourses((data as unknown as Course[]) || []);
       } catch (err) {
         console.error('Erreur lors de la récupération des cours:', err);
         setError(err instanceof Error ? err.message : 'Une erreur est survenue');
