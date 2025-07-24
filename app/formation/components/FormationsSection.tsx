@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Plus, Minus } from 'lucide-react';
+import { useFormations } from '../../../hooks/useFormations';
+import FormationModal from './FormationModal';
 
 const styles = `
   .fade-in-up {
@@ -33,6 +35,14 @@ const FormationsSection: React.FC = () => {
   const mobileCardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const hasAnimated = useRef(false);
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedFormation, setSelectedFormation] = useState<{
+    type: string;
+    title: string;
+    courses: any[];
+  } | null>(null);
+
+  const { preventionRisques, formationContinue, vaeEtBilan, loading } = useFormations();
 
   const formations = [
     {
@@ -57,6 +67,38 @@ const FormationsSection: React.FC = () => {
 
   const toggleAccordion = (index: number) => {
     setOpenAccordion(openAccordion === index ? null : index);
+  };
+
+  const openFormationModal = (formationType: string) => {
+    let courses: any[] = [];
+    let title = '';
+
+    switch (formationType) {
+      case 'prevention-risques':
+        courses = preventionRisques;
+        title = 'Prévention des risques';
+        break;
+      case 'bilan-competences':
+        courses = vaeEtBilan;
+        title = 'Bilan de compétences et VAE';
+        break;
+      case 'formation-continue':
+        courses = formationContinue;
+        title = 'Formation continue';
+        break;
+    }
+
+    setSelectedFormation({
+      type: formationType,
+      title,
+      courses
+    });
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedFormation(null);
   };
 
   useEffect(() => {
@@ -156,7 +198,10 @@ const FormationsSection: React.FC = () => {
                   </div>
                   
                   <div className="mt-auto flex justify-center">
-                    <button className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-lg">
+                    <button 
+                      onClick={() => openFormationModal(index === 0 ? 'prevention-risques' : index === 1 ? 'bilan-competences' : 'formation-continue')}
+                      className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-lg"
+                    >
                       En voir plus
                       <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -216,7 +261,10 @@ const FormationsSection: React.FC = () => {
                         ))}
                       </div>
 
-                      <button className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-lg">
+                      <button 
+                        onClick={() => openFormationModal(index === 0 ? 'prevention-risques' : index === 1 ? 'bilan-competences' : 'formation-continue')}
+                        className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-lg"
+                      >
                         En voir plus
                         <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </button>
@@ -252,6 +300,16 @@ const FormationsSection: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {selectedFormation && (
+        <FormationModal
+          isOpen={modalOpen}
+          onClose={closeModal}
+          title={selectedFormation.title}
+          courses={selectedFormation.courses}
+          loading={loading}
+        />
+      )}
     </>
   );
 };
