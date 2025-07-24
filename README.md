@@ -129,4 +129,4 @@ Le design est entièrement responsive avec des breakpoints optimisés :
 
 ## 📊 Analyse
 
-Le projet utilise les Web Vitals de Next.js pour surveiller les performances et l'expérience utilisateur.
+Le projet utilise les Web Vitals de Next.js pour surveiller les performances et l'expérience utilisateur.# Force Vercel redeploy - Thu Jul 24 20:16:45 CEST 2025
