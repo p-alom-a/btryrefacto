@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import CoursesList from '../components/CoursesList';
 
 export default function CategoryPage() {
@@ -26,6 +28,17 @@ export default function CategoryPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Bouton retour */}
+        <div className="mb-8">
+          <Link 
+            href="/formation"
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Retour aux formations
+          </Link>
+        </div>
+
         <div className="text-center mb-12">
           <h1 className="text-4xl lg:text-5xl font-light text-gray-900 mb-4">
             {getCategoryTitle(category)}
