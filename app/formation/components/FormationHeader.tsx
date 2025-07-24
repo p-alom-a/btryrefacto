@@ -27,7 +27,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
     `}>
       {/* Logo */}
       <div className="flex items-center">
-        <Link href="/" className="block">
+        <Link href="/formation" className="block">
           <Image
             src="/images/formation/logo-formation.jpg"
             alt="btry logo"
