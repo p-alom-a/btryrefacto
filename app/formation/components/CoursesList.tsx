@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import Link from 'next/link';
 import { Clock, Award, BookOpen } from 'lucide-react';
 import { useSupabaseData, Course } from '../hooks/useSupabaseData';
 
@@ -77,13 +78,14 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {courses.map((course) => (
-        <div
+        <Link
           key={course.id}
-          className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-blue-200"
+          href={`/formation/${category}/${course.id}`}
+          className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-blue-200 block"
         >
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2 leading-tight">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 leading-tight hover:text-blue-600 transition-colors">
                 {course.titre}
               </h3>
             </div>
@@ -107,11 +109,11 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
           </div>
 
           <div className="mt-6 pt-4 border-t border-gray-100">
-            <button className="w-full bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">
+            <div className="w-full bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors text-center">
               En savoir plus
-            </button>
+            </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
