@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Plus, Minus } from 'lucide-react';
+import Link from 'next/link';
 
 const styles = `
   .fade-in-up {
@@ -39,19 +40,22 @@ const FormationsSection: React.FC = () => {
       title: "Prévention des risques",
       description: "Formations en sécurité, gestes et postures, premiers secours pour assurer la protection au travail.",
       image: "/images/formation/preventionrisques.png",
-      tags: ["SST", "Gestes & Postures"]
+      tags: ["SST", "Gestes & Postures"],
+      slug: "prevention-risques"
     },
     {
       title: "Bilan de compétences et VAE",
       description: "Accompagnement personnalisé pour valoriser votre expérience et valider vos acquis professionnels.",
       image: "/images/formation/bilanC_Vae.png",
-      tags: ["Reconversion", "Évolution pro"]
+      tags: ["Reconversion", "Évolution pro"],
+      slug: "bilan-competences"
     },
     {
       title: "Formation continue",
       description: "Actions de perfectionnement professionnel pour développer vos compétences tout au long de votre carrière.",
       image: "/images/formation/formationContinue.png",
-      tags: ["Management", "Bureautique"]
+      tags: ["Management", "Bureautique"],
+      slug: "formation-continue"
     }
   ];
 
@@ -156,10 +160,13 @@ const FormationsSection: React.FC = () => {
                   </div>
                   
                   <div className="mt-auto flex justify-center">
-                    <button className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-lg">
+                    <Link 
+                      href={`/formation/${formation.slug}`}
+                      className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-lg"
+                    >
                       En voir plus
                       <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -216,10 +223,13 @@ const FormationsSection: React.FC = () => {
                         ))}
                       </div>
 
-                      <button className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-lg">
+                      <Link 
+                        href={`/formation/${formation.slug}`}
+                        className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-lg"
+                      >
                         En voir plus
                         <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
