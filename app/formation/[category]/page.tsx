@@ -31,7 +31,7 @@ export default function CategoryPage() {
         {/* Bouton retour */}
         <div className="mb-8">
           <Link 
-            href="/formation"
+            href="/formation#formations"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />

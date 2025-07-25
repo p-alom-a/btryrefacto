@@ -65,6 +65,9 @@ const ContactSection: React.FC = () => {
     message: ''
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
   const formations = [
     'Prévention des risques',
     'Bilan de compétences et VAE',
@@ -80,8 +83,46 @@ const ContactSection: React.FC = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
+  const handleSubmit = async () => {
+    // Validation basique
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
+      setSubmitStatus('error');
+      return;
+    }
+
+    setIsLoading(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        // Réinitialiser le formulaire après succès
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          company: '',
+          formation: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -258,12 +299,42 @@ const ContactSection: React.FC = () => {
                     </div>
                   </div>
 
+                  {submitStatus === 'success' && (
+                    <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-xl">
+                      <p className="text-green-800 text-sm">
+                        ✅ Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.
+                      </p>
+                    </div>
+                  )}
+                  
+                  {submitStatus === 'error' && (
+                    <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl">
+                      <p className="text-red-800 text-sm">
+                        ❌ Une erreur s'est produite. Veuillez vérifier les champs requis et réessayer.
+                      </p>
+                    </div>
+                  )}
+
                   <button
                     onClick={handleSubmit}
-                    className="w-full bg-blue-900 text-white py-4 px-6 rounded-xl font-medium hover:bg-blue-800 transition-colors flex items-center justify-center group"
+                    disabled={isLoading}
+                    className={`w-full py-4 px-6 rounded-xl font-medium flex items-center justify-center group transition-colors ${
+                      isLoading 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-blue-900 hover:bg-blue-800 text-white'
+                    }`}
                   >
-                    Envoyer votre demande
-                    <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    {isLoading ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                        Envoi en cours...
+                      </>
+                    ) : (
+                      <>
+                        Envoyer votre demande
+                        <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
