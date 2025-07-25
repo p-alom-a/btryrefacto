@@ -1,38 +1,47 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { resend, EMAIL_CONFIG } from '@/lib/resend';
-import { createFormationEmailTemplate } from '@/lib/email-templates';
+import { createHomepageEmailTemplate } from '@/lib/email-templates';
 
-interface ContactFormData {
-  firstName: string;
-  lastName: string;
+interface HomepageContactData {
+  name: string;
+  companyName: string;
   email: string;
   phone: string;
-  company: string;
-  formation: string;
+  service: string;
   message: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body: ContactFormData = await request.json();
+    const body: HomepageContactData = await request.json();
     
-    const { firstName, lastName, email, phone, company, formation, message } = body;
+    const { name, email, phone, service } = body;
 
-    // Validation basique
-    if (!firstName || !lastName || !email || !message) {
+    // Validation des champs requis
+    if (!name || !email || !phone || !service) {
       return NextResponse.json(
-        { error: 'Les champs prénom, nom, email et message sont requis' },
+        { error: 'Les champs nom, email, téléphone et service sont requis' },
+        { status: 400 }
+      );
+    }
+
+    // Validation de l'email
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Format d\'email invalide' },
         { status: 400 }
       );
     }
 
     // Génération du template HTML
-    const emailHtml = createFormationEmailTemplate(body);
+    const emailHtml = createHomepageEmailTemplate(body);
 
+    // Envoi de l'email via Resend
     const { data, error } = await resend.emails.send({
       from: EMAIL_CONFIG.from,
       to: [EMAIL_CONFIG.to],
-      subject: `Nouvelle demande de contact btry formation - ${firstName} ${lastName}`,
+      subject: `Nouvelle demande de contact btry solution - ${name}`,
       html: emailHtml,
     });
 
@@ -45,7 +54,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { message: 'Email envoyé avec succès', data },
+      { message: 'Demande de rappel envoyée avec succès', data },
       { status: 200 }
     );
 
