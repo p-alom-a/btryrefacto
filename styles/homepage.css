@@ -1156,6 +1156,7 @@ nav a:hover {
   grid-template-columns: 1fr 1fr;
   gap: 3em;
   align-items: center;
+  justify-items: center;
 }
 
 .contact-heading {
@@ -1214,7 +1215,7 @@ nav a:hover {
 
 .contact-image {
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   height: auto;
   border-radius: var(--border-radius-card);
 }
@@ -1231,7 +1232,8 @@ nav a:hover {
 .contact-details {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 1.5em;
 }
 

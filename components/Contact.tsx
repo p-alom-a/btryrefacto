@@ -182,34 +182,34 @@ export default function Contact() {
               <Image
                 src="/images/worldmap.webp"
                 alt="Mapmonde BTRY"
-                width={300}
-                height={200}
+                width={400}
+                height={270}
                 className="contact-image"
               />
             </div>
             <div className="contact-detail-container">
               <p className="subtitle-apropos whitefont">Bureau Métropole / Outre-Mer</p>
               <div className="contact-details">
-                <span className="material-symbols-outlined">call</span>
-                <p>+33(0)684145398</p>
-                <span className="material-symbols-outlined">alternate_email</span>
-                <p>contact@btry.fr</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+                  <span className="material-symbols-outlined">call</span>
+                  <p style={{ margin: 0 }}>+33(0)684145398</p>
+                </div>
+                <a 
+                  aria-label="Chat on WhatsApp" 
+                  href="https://wa.me/594694257718"
+                  className="test-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/images/WhatsAppButtonWhiteSmall.png"
+                    alt="Chat on WhatsApp"
+                    width={160}
+                    height={44}
+                    className="whatsapp-icon"
+                  />
+                </a>
               </div>
-              <a 
-                aria-label="Chat on WhatsApp" 
-                href="https://wa.me/594694257718"
-                className="test-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/images/WhatsAppButtonWhiteSmall.png"
-                  alt="Chat on WhatsApp"
-                  width={150}
-                  height={40}
-                  className="whatsapp-icon"
-                />
-              </a>
             </div>
           </div>
 
