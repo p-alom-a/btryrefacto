@@ -101,7 +101,7 @@ export default function FormationHero() {
             
             <div className="flex flex-row flex-wrap w-[70%]">
               <span className="formation-etiquette rounded-[11px] px-[17px] py-[2px] font-normal text-base no-underline font-primary mr-4 mb-4 border border-[#002768] text-[#002768] max-w-[300px] text-center box-border transition-all duration-300 cursor-pointer relative overflow-hidden opacity-0">
-                Prévention des risques
+                Prévention des risques et formations spécifiques
               </span>
               <span className="formation-etiquette rounded-[11px] px-[17px] py-[2px] font-normal text-base no-underline font-primary mr-4 mb-4 border border-[#002768] text-[#002768] max-w-[300px] text-center box-border transition-all duration-300 cursor-pointer relative overflow-hidden opacity-0">
                 Bilan de compétences

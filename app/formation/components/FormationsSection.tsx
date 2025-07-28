@@ -37,10 +37,10 @@ const FormationsSection: React.FC = () => {
 
   const formations = [
     {
-      title: "Prévention des risques",
+      title: "Prévention des risques et formations spécifiques",
       description: "Formations en sécurité, gestes et postures, premiers secours pour assurer la protection au travail.",
       image: "/images/formation/preventionrisques.png",
-      tags: ["SST", "Gestes & Postures"],
+      tags: ["Prévention", "Habilitation"],
       slug: "prevention-risques"
     },
     {

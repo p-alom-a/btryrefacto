@@ -69,7 +69,7 @@ const ContactSection: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const formations = [
-    'Prévention des risques',
+    'Prévention des risques et formations spécifiques',
     'Bilan de compétences et VAE',
     'Formation continue',
     'Autre'

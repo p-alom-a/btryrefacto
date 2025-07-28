@@ -66,7 +66,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                 href="#prevention-risques" 
                 className="text-black no-underline block px-4 py-3 hover:bg-[#ddd] transition-colors"
               >
-                Prévention des risques
+                Prévention des risques et formations spécifiques
               </a>
               <a 
                 href="#bilan-competences" 

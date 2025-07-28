@@ -13,7 +13,7 @@ export default function CategoryPage() {
   const getCategoryTitle = (category: string) => {
     switch (category) {
       case 'prevention-risques':
-        return 'Prévention des risques';
+        return 'Prévention des risques et formations spécifiques';
       case 'bilan-competences':
         return 'Bilan de compétences';
       case 'vae':
