@@ -52,6 +52,32 @@ function ContactModal({
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        @media (max-width: 768px) {
+          .contact-modal-content {
+            padding: 2rem !important;
+            font-size: 0.9rem;
+          }
+          .contact-modal-title {
+            font-size: 1.5rem !important;
+          }
+          .contact-modal-subtitle {
+            font-size: 1rem !important;
+          }
+          .contact-modal-label {
+            font-size: 0.8rem !important;
+          }
+          .contact-modal-input {
+            font-size: 0.9rem !important;
+            padding: 0.65rem 1rem !important;
+          }
+          .contact-modal-input-icon {
+            padding-left: 2.3rem !important;
+          }
+          .contact-modal-button {
+            padding: 0.75rem 1rem !important;
+            font-size: 0.9rem !important;
+          }
+        }
       `}</style>
       <div 
         className="modal-overlay"
@@ -70,7 +96,7 @@ function ContactModal({
         onClick={onClose}
       >
         <div 
-          className="modal-content"
+          className="modal-content contact-modal-content"
           style={{
             backgroundColor: 'white',
             borderRadius: '1.5rem',
@@ -104,7 +130,7 @@ function ContactModal({
           </span>
           
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <h2 style={{ 
+            <h2 className="contact-modal-title" style={{ 
               fontSize: '1.875rem', 
               fontWeight: '300', 
               color: '#111827', 
@@ -113,7 +139,7 @@ function ContactModal({
             }}>
               Être rappelé
             </h2>
-            <p style={{ 
+            <p className="contact-modal-subtitle" style={{ 
               fontSize: '1.125rem', 
               color: '#4b5563', 
               fontWeight: '300',
@@ -125,7 +151,7 @@ function ContactModal({
           
           <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div>
-              <label style={{ 
+              <label className="contact-modal-label" style={{ 
                 display: 'block', 
                 fontSize: '0.875rem', 
                 fontWeight: '500', 
@@ -146,6 +172,7 @@ function ContactModal({
                 }} />
                 <input
                   type="text"
+                  className="contact-modal-input contact-modal-input-icon"
                   {...register('name', { required: 'Ce champ est requis' })}
                   style={{
                     width: '100%',
@@ -174,7 +201,7 @@ function ContactModal({
             </div>
 
             <div>
-              <label style={{ 
+              <label className="contact-modal-label" style={{ 
                 display: 'block', 
                 fontSize: '0.875rem', 
                 fontWeight: '500', 
@@ -208,7 +235,7 @@ function ContactModal({
             </div>
 
             <div>
-              <label style={{ 
+              <label className="contact-modal-label" style={{ 
                 display: 'block', 
                 fontSize: '0.875rem', 
                 fontWeight: '500', 
@@ -236,6 +263,7 @@ function ContactModal({
                       message: 'Email invalide'
                     }
                   })}
+                  className="contact-modal-input contact-modal-input-icon"
                   style={{
                     width: '100%',
                     paddingLeft: '2.5rem',
@@ -263,7 +291,7 @@ function ContactModal({
             </div>
 
             <div>
-              <label style={{ 
+              <label className="contact-modal-label" style={{ 
                 display: 'block', 
                 fontSize: '0.875rem', 
                 fontWeight: '500', 
@@ -285,6 +313,7 @@ function ContactModal({
                 <input
                   type="tel"
                   {...register('phone', { required: 'Ce champ est requis' })}
+                  className="contact-modal-input contact-modal-input-icon"
                   style={{
                     width: '100%',
                     paddingLeft: '2.5rem',
@@ -312,7 +341,7 @@ function ContactModal({
             </div>
 
             <div>
-              <label style={{ 
+              <label className="contact-modal-label" style={{ 
                 display: 'block', 
                 fontSize: '0.875rem', 
                 fontWeight: '500', 
@@ -354,7 +383,7 @@ function ContactModal({
             </div>
 
             <div>
-              <label style={{ 
+              <label className="contact-modal-label" style={{ 
                 display: 'block', 
                 fontSize: '0.875rem', 
                 fontWeight: '500', 
@@ -438,12 +467,14 @@ function ContactModal({
             {submitStatus !== 'success' && (
               <button
                 type="submit"
+                className="contact-modal-button"
                 disabled={isSubmitting}
                 style={{
                   width: '100%',
                   padding: '1rem 1.5rem',
                   borderRadius: '0.75rem',
                   fontWeight: '500',
+                  fontSize: '1rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',

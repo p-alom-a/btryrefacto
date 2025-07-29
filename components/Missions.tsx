@@ -10,7 +10,44 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   if (!isOpen) return null
 
   const modalContent = (
-    <div 
+    <>
+      <style>{`
+        @media (max-width: 768px) {
+          .missions-modal-content {
+            padding: 1.5rem !important;
+            font-size: 0.85rem !important;
+          }
+          .missions-modal-content h2 {
+            font-size: 1.2rem !important;
+          }
+          .missions-modal-content .number-mission {
+            font-size: 1rem !important;
+          }
+          .missions-modal-content p {
+            font-size: 0.8rem !important;
+            line-height: 1.4 !important;
+          }
+          .missions-modal-content .img-solutions {
+            max-width: 80px !important;
+            height: auto !important;
+          }
+          .topmodal-missions {
+            padding: 1rem !important;
+          }
+          .topmodal-missions h2 {
+            font-size: 1.3rem !important;
+            margin: 0 !important;
+          }
+          .container-solutions {
+            padding: 1rem !important;
+          }
+          .bloc {
+            margin-bottom: 1.5rem !important;
+            padding: 1rem !important;
+          }
+        }
+      `}</style>
+      <div 
       className="modal-overlay"
       style={{
         position: 'fixed',
@@ -27,7 +64,7 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
       onClick={onClose}
     >
       <div 
-        className="modal-content"
+        className="modal-content missions-modal-content"
         style={{
           backgroundColor: 'white',
           borderRadius: '1rem',
@@ -85,6 +122,7 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
         </div>
       </div>
     </div>
+    </>
   )
 
   // Portal vers document.body

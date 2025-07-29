@@ -1246,6 +1246,7 @@ nav a:hover {
   padding: 1em 2em;
   border-radius: var(--border-radius-btn);
   font-weight: 500;
+  font-family: var(--font-primary);
   text-decoration: none;
   text-align: center;
   transition: all 0.3s ease;
@@ -1495,16 +1496,54 @@ nav a:hover {
 
   
   .contact-content {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     padding: 0 20px;
   }
   
   .contact-heading {
-    font-size: 1.8em;
+    font-size: 1.6em;
   }
   
   .btn-formulaire-contact {
+    gap: 0.8em;
+    justify-content: center;
+  }
+
+  .btn-mail, .btn-appel {
+    padding: 0.8em 1.5em;
+    font-size: 0.9em;
+    font-family: var(--font-primary) !important;
+  }
+
+  .contact-detail-container {
+    margin-top: 1.5em;
+  }
+
+  .subtitle-apropos {
+    font-size: 1.3em;
+    padding-bottom: 0.5em;
+  }
+
+  .contact-details {
+    font-size: 0.85em;
+  }
+
+  .contact-details div p {
+    color: white !important;
+  }
+
+  .left-contact-container {
+    text-align: center;
+  }
+
+  .right-contact-container {
+    display: flex;
     flex-direction: column;
+  }
+
+  .contact-image-container {
+    display: none;
   }
   
   .linkedin-posts {
