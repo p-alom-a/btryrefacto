@@ -299,6 +299,17 @@ nav a:hover {
 .img-hero {
   will-change: transform, opacity;
 }
+
+/* ------------------------------------------
+   HERO ANIMATION INITIAL STATES
+------------------------------------------ */
+.logo-btry-solution,
+.paragraphe-accroche-hero,
+.etiquette,
+.img-hero {
+  opacity: 0;
+  transform: translateY(20px);
+}
 .img-hero {
   transition: transform 0.3s ease;
 }
