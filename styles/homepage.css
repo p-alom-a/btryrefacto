@@ -526,6 +526,31 @@ nav a:hover {
     width: 180px ;
     height: 180px ;
   }
+  
+  .linkedin-posts {
+    padding: 1.5em 0;
+  }
+  
+  .posts-grid {
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .linkedin-post:not(.featured-post) {
+    display: none;
+  }
+  
+  .featured-post {
+    width: 100% !important;
+    max-width: 400px !important;
+    order: 0;
+  }
+  
+  .titre-section-linkedin {
+    font-size: 1.8em;
+  }
 }
 
 /* ------------------------------------------
@@ -966,9 +991,9 @@ nav a:hover {
 ------------------------------------------ */
 .linkedin-posts {
   margin-top: 4em;
-  padding: 4em 0;
+  padding: 4em 0 6em 0;
   background-color: var(--color-bg-light);
-  height: 120vh;
+  min-height: auto;
 }
 
 .linkedin-container {
@@ -1191,7 +1216,7 @@ nav a:hover {
 .contact {
   padding: 4em 0;
   color: white;
-  background-color: transparent;
+  background-color: var(--color-primary);
 }
 
 .contact-content {
@@ -1482,41 +1507,34 @@ nav a:hover {
     flex-direction: column;
   }
   
+  .linkedin-posts {
+    padding: 2em 0;
+  }
+  
   .posts-grid {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    gap: 1.5em;
+    align-items: center;
     padding: 0 20px;
-    gap: 1em;
   }
   
   .linkedin-post {
-    width: 75vw;
-    min-width: 280px;
-    scroll-snap-align: center;
+    width: 100%;
+    max-width: 400px;
+    min-width: auto;
   }
   
   .featured-post {
-    width: 75vw;
-    min-width: 280px;
-  }
-  
-  .posts-grid .linkedin-post:nth-child(1),
-  .posts-grid .linkedin-post:nth-child(3) {
-    display: none;
+    width: 100%;
+    max-width: 420px;
+    order: -1;
   }
   
   .entete-apropos-container,
-
   .linkedin-container {
     padding: 0 20px;
   }
   
-  .c-apropos {
-    font-size: 1.4em;
-  }
-  
-  /* .titre-section-missions, */
   .titre-section-linkedin {
     font-size: 2em;
   }

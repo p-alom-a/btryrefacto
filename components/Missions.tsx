@@ -1,8 +1,95 @@
 'use client'
 
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { createStaggeredAnimation, useGSAP } from '@/hooks/useGSAP'
+
+// Composant Modal avec Portal pour overlay plein écran
+function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null
+
+  const modalContent = (
+    <div 
+      className="modal-overlay"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 9999
+      }}
+      onClick={onClose}
+    >
+      <div 
+        className="modal-content"
+        style={{
+          backgroundColor: 'white',
+          borderRadius: '1rem',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          maxWidth: '90vw',
+          maxHeight: '90vh',
+          overflow: 'auto',
+          position: 'relative'
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="topmodal-missions">
+          <h2>Nos solutions assistance à exploitation</h2>
+          <span className="close" onClick={onClose}>&times;</span>
+        </div>
+        <div className="container-solutions">
+          <div className="bloc">
+            <img
+              src="/images/charge_affaire.webp"
+              alt="chargé d'affaire Btry dirigeant la mise en conformité SSI et la gestion des risques incendie"
+              className="img-solutions"
+            />
+            <h2><span className="number-mission">01.</span>Libérez-vous de vos contraintes techniques avec btry.</h2>
+            <p>Un chargé d'affaires dédié pilote vos vérifications, vos maintenances, vos contrats de services et vos plans d'actions selon vos besoins.
+              <br />Vous disposez de reporting simples et clairs
+              <br />Nous vous proposons des axes d'amélioration et d'optimisation
+              <br />Nous préparons vos commissions de sécurité</p>
+          </div>
+
+          <div className="bloc">
+            <img
+              src="/images/des%20solutions%20sur%20mesure-2.webp"
+              alt="solutions sur mesure pour répondre aux besoins spécifiques"
+              className="img-solutions"
+            />
+            <h2><span className="number-mission">02.</span>Des solutions sur-mesure pour répondre à vos besoins spécifiques</h2>
+            <p>Registre de sécurité, mise à jour et reconstitution de dossier SSI, notice de sécurité incendie, suivi de travaux d'aménagement, mise en place de vos contrats de vérifications, mise en place de vos contrats de maintenance, étude de faisabilité travaux, assistance achat matériel de sécurité, formation, audit d'installation technique, 
+              mise à jour plans d'intervention et d'évacuation et d'autres services.</p>
+          </div>
+
+          <div className="bloc">
+            <img
+              src="/images/pompier-3.webp"
+              alt="pompiers utilise la fiche d'intervention rapide SSI incendie"
+              className="img-solutions"
+            />
+            <h2>
+              <span className="number-mission">03.</span>Facilitez l'intervention des secours dans votre établissement avec la FIRE <sup><Image src="/images/logo_fire-3.webp" alt="Icone" width={19} height={19} style={{display: 'inline'}} /></sup>
+            </h2>
+            <p>Développée par le SDIS 76, la Fiche d'Intervention Rapide Etablissement (FIRE) permet aux sapeurs-pompiers d'identifier rapidement vos points sensibles pour intervenir efficacement et en sécurité.
+              <br />La FIRE est stockées dans un dispositif la protégeant des intempéries et facilement identifiable pour les sapeurs-pompiers. 
+              <br />La FIRE est aussi complétée par un QR code donnant accès simplement à plus d'informations pour la chaine de commandement. 
+              Donnez ainsi aux secours tous le moyens de protéger les occupants et vos biens.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+  // Portal vers document.body
+  return typeof window !== 'undefined' ? createPortal(modalContent, document.body) : null
+}
 
 export default function Missions() {
   const [activeAccordion, setActiveAccordion] = useState<string | null>(null)
@@ -168,57 +255,11 @@ export default function Missions() {
         </div>
       </div>
 
-      {/* Modal */}
-      {showModal && (
-        <div className="modal" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="topmodal-missions">
-              <h2>Nos solutions assistance à exploitation</h2>
-              <span className="close" onClick={closeModal}>&times;</span>
-            </div>
-            <div className="container-solutions">
-              <div className="bloc">
-                <img
-                  src="/images/charge_affaire.webp"
-                  alt="chargé d'affaire Btry dirigeant la mise en conformité SSI et la gestion des risques incendie"
-                  className="img-solutions"
-                />
-                <h2><span className="number-mission">01.</span>Libérez-vous de vos contraintes techniques avec btry.</h2>
-                <p>Un chargé d'affaires dédié pilote vos vérifications, vos maintenances, vos contrats de services et vos plans d'actions selon vos besoins.
-                  <br />Vous disposez de reporting simples et clairs
-                  <br />Nous vous proposons des axes d'amélioration et d'optimisation
-                  <br />Nous préparons vos commissions de sécurité</p>
-              </div>
-
-              <div className="bloc">
-                <img
-                  src="/images/des%20solutions%20sur%20mesure-2.webp"
-                  alt="solutions sur mesure pour répondre aux besoins spécifiques"
-                  className="img-solutions"
-                />
-                <h2><span className="number-mission">02.</span>Des solutions sur-mesure pour répondre à vos besoins spécifiques</h2>
-                <p>Registre de sécurité, mise à jour et reconstitution de dossier SSI, notice de sécurité incendie, suivi de travaux d'aménagement, mise en place de vos contrats de vérifications, mise en place de vos contrats de maintenance, étude de faisabilité travaux, assistance achat matériel de sécurité, formation, audit d'installation technique, 
-                  mise à jour plans d'intervention et d'évacuation et d'autres services.</p>
-              </div>
-
-              <div className="bloc">
-                <img
-                  src="/images/pompier-3.webp"
-                  alt="pompiers utilise la fiche d'intervention rapide SSI incendie"
-                  className="img-solutions"
-                />
-                <h2>
-                  <span className="number-mission">03.</span>Facilitez l'intervention des secours dans votre établissement avec la FIRE <sup><Image src="/images/logo_fire-3.webp" alt="Icone" width={19} height={19} style={{display: 'inline'}} /></sup>
-                </h2>
-                <p>Développée par le SDIS 76, la Fiche d'Intervention Rapide Etablissement (FIRE) permet aux sapeurs-pompiers d'identifier rapidement vos points sensibles pour intervenir efficacement et en sécurité.
-                  <br />La FIRE est stockées dans un dispositif la protégeant des intempéries et facilement identifiable pour les sapeurs-pompiers. 
-                  <br />La FIRE est aussi complétée par un QR code donnant accès simplement à plus d'informations pour la chaine de commandement. 
-                  Donnez ainsi aux secours tous le moyens de protéger les occupants et vos biens.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Modal avec React Portal pour overlay plein écran */}
+      <MissionsModal
+        isOpen={showModal}
+        onClose={closeModal}
+      />
     </section>
   )
 }

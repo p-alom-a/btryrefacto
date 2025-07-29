@@ -38,11 +38,16 @@ export default function LinkedIn() {
     }
   }, [])
 
-  // Animations fade-in simples pour LinkedIn
-  useGSAP(createFadeInAnimation('.titre-section-linkedin'), [])
-  useGSAP(createFadeInAnimation('.subtitle-linkedin', 0.1), [])  
-  useGSAP(createFadeInAnimation('.linkedin-follow-btn', 0.2), [])
-  useGSAP(createFadeInAnimation('.linkedin-post', 0.1), [])
+  // Animations fade-in simples pour LinkedIn - Désactivé en mobile
+  useGSAP(() => {
+    const isMobile = window.innerWidth <= 768
+    if (!isMobile) {
+      createFadeInAnimation('.titre-section-linkedin')()
+      createFadeInAnimation('.subtitle-linkedin', 0.1)()
+      createFadeInAnimation('.linkedin-follow-btn', 0.2)()
+      createFadeInAnimation('.linkedin-post', 0.1)()
+    }
+  }, [])
 
   return (
     <section className="linkedin-posts" id="linkedin">
