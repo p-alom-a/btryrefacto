@@ -10,70 +10,12 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   if (!isOpen) return null
 
   const modalContent = (
-    <>
-      <style>{`
-        @media (max-width: 768px) {
-          .missions-modal-content {
-            padding: 1.5rem !important;
-            font-size: 0.85rem !important;
-          }
-          .missions-modal-content h2 {
-            font-size: 1.2rem !important;
-          }
-          .missions-modal-content .number-mission {
-            font-size: 1rem !important;
-          }
-          .missions-modal-content p {
-            font-size: 0.8rem !important;
-            line-height: 1.4 !important;
-          }
-          .missions-modal-content .img-solutions {
-            max-width: 80px !important;
-            height: auto !important;
-          }
-          .topmodal-missions {
-            padding: 1rem !important;
-          }
-          .topmodal-missions h2 {
-            font-size: 1.3rem !important;
-            margin: 0 !important;
-          }
-          .container-solutions {
-            padding: 1rem !important;
-          }
-          .bloc {
-            margin-bottom: 1.5rem !important;
-            padding: 1rem !important;
-          }
-        }
-      `}</style>
-      <div 
-      className="modal-overlay"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 9999
-      }}
+    <div 
+      className="modal-overlay missions-modal-overlay"
       onClick={onClose}
     >
       <div 
         className="modal-content missions-modal-content"
-        style={{
-          backgroundColor: 'white',
-          borderRadius: '1rem',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-          maxWidth: '90vw',
-          maxHeight: '90vh',
-          overflow: 'auto',
-          position: 'relative'
-        }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="topmodal-missions">
@@ -90,7 +32,7 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
             <h2><span className="number-mission">01.</span>Libérez-vous de vos contraintes techniques avec btry.</h2>
             <p>Un chargé d'affaires dédié pilote vos vérifications, vos maintenances, vos contrats de services et vos plans d'actions selon vos besoins.
               <br />Vous disposez de reporting simples et clairs
-              <br />Nous vous proposons des axes d'amélioration et d'optimisation
+              Nous vous proposons des axes d'amélioration et d'optimisation
               <br />Nous préparons vos commissions de sécurité</p>
           </div>
 
@@ -122,7 +64,6 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
         </div>
       </div>
     </div>
-    </>
   )
 
   // Portal vers document.body
