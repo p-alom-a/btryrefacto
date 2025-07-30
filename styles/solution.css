@@ -346,6 +346,11 @@ section {
    MEDIA QUERIES (Max Width: 768px)
 ------------------------------------------ */
 @media screen and (max-width: 768px) {
+  /* Empêcher le scroll horizontal sur mobile */
+  body, html {
+    overflow-x: hidden;
+  }
+  
   .dropdown-content {
     display: none;
   }
