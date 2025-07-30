@@ -1,16 +1,23 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import { gsap } from 'gsap'
 import { useGSAP } from '@/hooks/useGSAP'
 
 export default function Hero() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
+    setIsMenuOpen(false)
   }
 
   // Animation d'entrée du hero
@@ -84,12 +91,116 @@ export default function Hero() {
             Contact
           </button>
         </nav>
-        <div className="burger-menu">
+        <div className={`burger-menu ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
           <span></span>
           <span></span>
           <span></span>
         </div>
       </header>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="mobile-menu-homepage">
+          <div className="mobile-menu-content">
+            {/* Header du menu */}
+            <div className="mobile-menu-header">
+              <Image
+                src="/images/btry-logo-2-2.png"
+                alt="btry logo"
+                width={80}
+                height={40}
+                className="mobile-menu-logo"
+              />
+              <button 
+                className="mobile-menu-close"
+                onClick={toggleMenu}
+              >
+                ×
+              </button>
+            </div>
+            
+            {/* Navigation */}
+            <nav className="mobile-menu-nav">
+              <ul className="mobile-menu-list">
+                <li className="mobile-menu-item">
+                  <a 
+                    href="#about" 
+                    onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}
+                  >
+                    À propos
+                  </a>
+                </li>
+                <li className="mobile-menu-item">
+                  <a 
+                    href="#mssns" 
+                    onClick={(e) => { e.preventDefault(); scrollToSection('mssns'); }}
+                  >
+                    Nos missions
+                  </a>
+                  <ul className="mobile-submenu">
+                    <li>
+                      <a 
+                        href="#assistance-aexploitation" 
+                        onClick={(e) => { e.preventDefault(); scrollToSection('assistance-aexploitation'); }}
+                      >
+                        Assistance à exploitation
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="#AMO" 
+                        onClick={(e) => { e.preventDefault(); scrollToSection('AMO'); }}
+                      >
+                        Assistance à maîtrise d'ouvrage technique
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="#audit-diagno" 
+                        onClick={(e) => { e.preventDefault(); scrollToSection('audit-diagno'); }}
+                      >
+                        Audit et diagnostic
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="#coordination-ssi" 
+                        onClick={(e) => { e.preventDefault(); scrollToSection('coordination-ssi'); }}
+                      >
+                        Coordination SSI
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="#delegationresponsabilites" 
+                        onClick={(e) => { e.preventDefault(); scrollToSection('delegationresponsabilites'); }}
+                      >
+                        Délégation des responsabilités
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li className="mobile-menu-item">
+                  <a 
+                    href="#cntct" 
+                    onClick={(e) => { e.preventDefault(); scrollToSection('cntct'); }}
+                  >
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            
+            {/* Footer du menu */}
+            <div className="mobile-menu-footer">
+              <div className="mobile-menu-footer-text">
+                BTRY Solutions © 2025
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
 
       <div className="hero">
         <div className="container-hero">

@@ -16,6 +16,10 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
   }
 
   const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
     setIsMenuOpen(false)
   }
 
@@ -112,10 +116,99 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
         <span className="w-6 h-[3px] bg-blue-900 transition-all duration-300"></span>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="max-md:fixed max-md:inset-0 max-md:bg-black max-md:bg-opacity-50 max-md:z-40 hidden" 
-             onClick={() => setIsMenuOpen(false)} />
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] md:hidden">
+          <div className="fixed top-0 right-0 w-80 h-full bg-white shadow-xl">
+            <div className="flex flex-col h-full">
+              {/* Header du menu */}
+              <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                <Image
+                  src="/images/formation/logo-formation.jpg"
+                  alt="btry formation logo"
+                  width={80}
+                  height={40}
+                  className="h-8 w-auto"
+                />
+                <button 
+                  className="text-2xl text-gray-600 hover:text-gray-800 transition-colors"
+                  onClick={toggleMenu}
+                >
+                  ×
+                </button>
+              </div>
+              
+              {/* Navigation */}
+              <nav className="flex-1 p-6">
+                <ul className="space-y-2">
+                  <li>
+                    <a 
+                      href="#about" 
+                      className="block py-4 px-4 text-base font-medium text-gray-700 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                      onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}
+                    >
+                      À propos
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="#formations" 
+                      className="block py-4 px-4 text-base font-medium text-gray-700 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                      onClick={(e) => { e.preventDefault(); scrollToSection('formations'); }}
+                    >
+                      Nos formations
+                    </a>
+                    <ul className="ml-4 mt-2 space-y-1">
+                      <li>
+                        <Link
+                          href="/formation/prevention-risques"
+                          className="block py-2 px-4 text-sm text-gray-500 hover:text-blue-800 hover:bg-blue-25 rounded transition-all duration-200"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Prévention des risques et formations spécifiques
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/formation/bilan-competences"
+                          className="block py-2 px-4 text-sm text-gray-500 hover:text-blue-800 hover:bg-blue-25 rounded transition-all duration-200"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Bilan de compétences et VAE
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/formation/formation-continue"
+                          className="block py-2 px-4 text-sm text-gray-500 hover:text-blue-800 hover:bg-blue-25 rounded transition-all duration-200"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Formation continue
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a 
+                      href="#contact" 
+                      className="block py-4 px-4 text-base font-medium text-gray-700 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                      onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
+                    >
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              
+              {/* Footer du menu */}
+              <div className="p-6 border-t border-gray-100">
+                <div className="text-xs text-gray-400 text-center">
+                  BTRY Formations © 2025
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </header>
   )
