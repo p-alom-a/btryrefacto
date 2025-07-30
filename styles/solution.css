@@ -50,7 +50,7 @@ section {
 /* ------------------------------------------
    HEADER 
 ------------------------------------------ */
-header {
+.solution-page header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -376,7 +376,7 @@ nav a:hover {
     font-size: 14px;
   }
 
-  header {
+  .solution-page header {
     flex-direction: row;
     align-items: center;
     padding: 20px;
@@ -449,7 +449,7 @@ nav a:hover {
     margin-top: 1em;
   }
   
-  header {
+  .solution-page header {
     padding: 10px 15px;
   }
   

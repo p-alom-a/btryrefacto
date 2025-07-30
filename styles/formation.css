@@ -149,6 +149,10 @@
 
 /* Media queries pour tablettes et mobiles (768px et moins) */
 @media screen and (max-width: 768px) {
+  /* Masquer la navigation en mobile pour éviter les conflits avec Solution */
+  nav {
+    display: none !important;
+  }
   .formation-hero-container {
     flex-direction: column !important;
     text-align: center !important;
