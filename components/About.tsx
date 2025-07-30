@@ -12,7 +12,7 @@ export default function About() {
   return (
     <section className="apropos" id="about">
       <div className="entete-apropos-container">
-        <h2 className="corps1 c-apropos">
+        <h2 className="corps1 c-apropos solution-heading">
           <span className="emphasis">
             <span className="logo-typo">btry</span> est un bureau d'études
           </span> spécialisé dans la <span className="emphasis">sécurité incendie</span> 
@@ -29,7 +29,7 @@ export default function About() {
               <div className="octagon">
                 <h4 className="number-apropos">01</h4>
               </div>
-              <h3 className="subtitle-apropos">
+              <h3 className="subtitle-apropos solution-subtitle">
                 Un accompagnement <br />sur-mesure pour tous vos projets
               </h3>
             </div>
@@ -45,7 +45,7 @@ export default function About() {
               <div className="octagon">
                 <h4 className="number-apropos">02</h4>
               </div>
-              <h3 className="subtitle-apropos">Une équipe expérimentée</h3>
+              <h3 className="subtitle-apropos solution-subtitle">Une équipe expérimentée</h3>
             </div>
             <p className="paragraphe-apropos">
               En plus des connaissances théoriques, les collaborateurs de btry possèdent une grande expérience de terrain leur permettant de vous 
@@ -58,7 +58,7 @@ export default function About() {
               <div className="octagon">
                 <h4 className="number-apropos">03</h4>
               </div>
-              <h3 className="subtitle-apropos">
+              <h3 className="subtitle-apropos solution-subtitle">
                 Un regard d'expert, <br />un esprit de terrain
               </h3>
             </div>

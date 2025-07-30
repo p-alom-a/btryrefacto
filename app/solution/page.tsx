@@ -9,7 +9,7 @@ import Contact from '@/components/Contact'
 
 export default function Solution() {
   return (
-    <>
+    <div className="solution-page">
       <main>
         <Hero />
         <About />
@@ -17,6 +17,6 @@ export default function Solution() {
         <LinkedIn />
         <Contact />
       </main>
-    </>
+    </div>
   )
 }

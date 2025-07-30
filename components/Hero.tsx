@@ -215,7 +215,7 @@ export default function Hero() {
                   className="logo-btry-solution"
                 />
               </div>
-              <h1 className="paragraphe-accroche-hero">
+              <h1 className="paragraphe-accroche-hero solution-title">
                 Optimisez la sécurité incendie <br className="mobile-break" />et 
                 la gestion de vos bâtiments <br className="mobile-break" />avec notre expertise.
               </h1>

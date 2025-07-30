@@ -1,6 +1,7 @@
 
-
-:root {
+@import "tailwindcss";
+/* Variables CSS spécifiques pour la solution */
+.solution-page {
   --color-primary: #002768;
   --color-secondary: #6FC6FF;
   --color-bg-light: #F0F7FF;
@@ -9,37 +10,11 @@
   --border-radius-post: 12px;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html {
-    scroll-behavior: smooth;
-}
 
-html, body {
-  width: 100%; 
-  padding: 0;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
-
-body {
-  margin: 0;
-  box-sizing: border-box;
-  background-color: rgb(255,255,255);
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333;
-  font-family: var(--font-primary);
-  transition: background-color 0.6s ease;
-}
-
-h1, h2, h3 {
+/* Classes spécifiques pour les titres solution */
+.solution-title, .solution-heading, .solution-subtitle {
     font-family: var(--font-heading);
-}
+} 
 
 .logo-typo{
     font-family: var(--font-logo);

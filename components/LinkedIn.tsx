@@ -53,7 +53,7 @@ export default function LinkedIn() {
     <section className="linkedin-posts" id="linkedin">
       <div className="linkedin-container">
         <div className="linkedin-header">
-          <h3 className="titre-section-linkedin">ACTUALITÉS</h3>
+          <h3 className="titre-section-linkedin solution-subtitle">ACTUALITÉS</h3>
           <p className="subtitle-linkedin">Suivez nos dernières actualités et projets</p>
           <a 
             href="https://www.linkedin.com/company/btry-solutions/" 
@@ -83,7 +83,7 @@ export default function LinkedIn() {
                   />
                 </div>
                 <div className="company-info">
-                  <h4>btry solution</h4>
+                  <h4 className="solution-subtitle">btry solution</h4>
                   <p>31 abonnés</p>
                   <span className="post-time">• il y a 1 mois</span>
                 </div>
@@ -118,7 +118,7 @@ export default function LinkedIn() {
                   />
                 </div>
                 <div className="company-info">
-                  <h4>btry solution</h4>
+                  <h4 className="solution-subtitle">btry solution</h4>
                   <p>31 abonnés</p>
                   <span className="post-time">• Épinglé</span>
                 </div>
@@ -141,7 +141,7 @@ export default function LinkedIn() {
             </div>
             
             <div className="post-content">
-              <h3 className="post-title">BTRY Solution</h3>
+              <h3 className="post-title solution-subtitle">BTRY Solution</h3>
               <p className="post-subtitle">Bureau d'études spécialisé en sécurité incendie et optimisation des bâtiments</p>
               
               <div className="post-features">
@@ -176,7 +176,7 @@ export default function LinkedIn() {
                   />
                 </div>
                 <div className="company-info">
-                  <h4>btry solution</h4>
+                  <h4 className="solution-subtitle">btry solution</h4>
                   <p>31 abonnés</p>
                   <span className="post-time">• il y a 1 mois</span>
                 </div>
@@ -194,7 +194,7 @@ export default function LinkedIn() {
             </div>
             
             <div className="post-content">
-              <h3 className="post-title-normal">btry buildvision</h3>
+              <h3 className="post-title-normal solution-subtitle">btry buildvision</h3>
               
               <p>📁 Vous disposez de plans de vos bâtiments ?<br />
               Pourquoi ne pas les utiliser pour préparer vos interventions, organiser vos consignes et procédures...</p>

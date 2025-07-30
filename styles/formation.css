@@ -4,6 +4,7 @@
 .formation-layout {
   /* Container principal pour toutes les pages formation */
   min-height: 100vh;
+  margin-top: 3.5em;
 }
 
 /* Support des fonts pour la section formation */

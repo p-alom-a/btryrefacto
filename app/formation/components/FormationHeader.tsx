@@ -100,7 +100,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
         {/* Contact Button Desktop */}
         <a 
           href="#contact"
-          className="cursor-pointer bg-blue-900 border-none rounded-[13px] px-6 py-[10px] text-white font-bold text-[17px] no-underline font-heading hover:bg-blue-800 transition-colors duration-200 max-md:hidden inline-block"
+          className="cursor-pointer bg-[#002768] border-none rounded-[13px] px-6 py-[10px] text-white font-bold text-[17px] no-underline font-heading hover:bg-[#001a52] transition-colors duration-200 max-md:hidden inline-block"
         >
           Contact
         </a>
@@ -111,9 +111,9 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
         className={`hidden flex-col cursor-pointer gap-1 max-md:flex ${isMenuOpen ? 'open' : ''}`}
         onClick={toggleMenu}
       >
-        <span className="w-6 h-[3px] bg-blue-900 transition-all duration-300"></span>
-        <span className="w-6 h-[3px] bg-blue-900 transition-all duration-300"></span>
-        <span className="w-6 h-[3px] bg-blue-900 transition-all duration-300"></span>
+        <span className="w-6 h-[3px] bg-[#002768] transition-all duration-300"></span>
+        <span className="w-6 h-[3px] bg-[#002768] transition-all duration-300"></span>
+        <span className="w-6 h-[3px] bg-[#002768] transition-all duration-300"></span>
       </div>
 
       {/* Mobile Menu */}
@@ -144,7 +144,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                   <li>
                     <a 
                       href="#about" 
-                      className="block py-4 px-4 text-base font-medium text-gray-700 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                      className="block py-4 px-4 text-base font-medium text-gray-700 hover:text-[#002768] hover:bg-blue-50 rounded-lg transition-all duration-200"
                       onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}
                     >
                       À propos
@@ -153,7 +153,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                   <li>
                     <a 
                       href="#formations" 
-                      className="block py-4 px-4 text-base font-medium text-gray-700 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                      className="block py-4 px-4 text-base font-medium text-gray-700 hover:text-[#002768] hover:bg-blue-50 rounded-lg transition-all duration-200"
                       onClick={(e) => { e.preventDefault(); scrollToSection('formations'); }}
                     >
                       Nos formations
@@ -162,7 +162,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                       <li>
                         <Link
                           href="/formation/prevention-risques"
-                          className="block py-2 px-4 text-sm text-gray-500 hover:text-blue-800 hover:bg-blue-25 rounded transition-all duration-200"
+                          className="block py-2 px-4 text-sm text-gray-500 hover:text-[#002768] hover:bg-blue-25 rounded transition-all duration-200"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           Prévention des risques et formations spécifiques
@@ -171,7 +171,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                       <li>
                         <Link
                           href="/formation/bilan-competences"
-                          className="block py-2 px-4 text-sm text-gray-500 hover:text-blue-800 hover:bg-blue-25 rounded transition-all duration-200"
+                          className="block py-2 px-4 text-sm text-gray-500 hover:text-[#002768] hover:bg-blue-25 rounded transition-all duration-200"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           Bilan de compétences et VAE
@@ -180,7 +180,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                       <li>
                         <Link
                           href="/formation/formation-continue"
-                          className="block py-2 px-4 text-sm text-gray-500 hover:text-blue-800 hover:bg-blue-25 rounded transition-all duration-200"
+                          className="block py-2 px-4 text-sm text-gray-500 hover:text-[#002768] hover:bg-blue-25 rounded transition-all duration-200"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           Formation continue
@@ -191,7 +191,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                   <li>
                     <a 
                       href="#contact" 
-                      className="block py-4 px-4 text-base font-medium text-gray-700 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                      className="block py-4 px-4 text-base font-medium text-gray-700 hover:text-[#002768] hover:bg-blue-50 rounded-lg transition-all duration-200"
                       onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
                     >
                       Contact

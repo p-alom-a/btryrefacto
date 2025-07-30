@@ -15,11 +15,11 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
       onClick={onClose}
     >
       <div 
-        className="modal-content missions-modal-content"
+        className="modal-content missions-modal-content solution-page"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="topmodal-missions">
-          <h2>Nos solutions assistance à exploitation</h2>
+          <h2 className="solution-heading">Nos solutions assistance à exploitation</h2>
           <span className="close" onClick={onClose}>&times;</span>
         </div>
         <div className="container-solutions">
@@ -29,7 +29,7 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
               alt="chargé d'affaire Btry dirigeant la mise en conformité SSI et la gestion des risques incendie"
               className="img-solutions"
             />
-            <h2><span className="number-mission">01.</span>Libérez-vous de vos contraintes techniques avec btry.</h2>
+            <h2 className="solution-heading"><span className="number-mission">01.</span>Libérez-vous de vos contraintes techniques avec btry.</h2>
             <p>Un chargé d'affaires dédié pilote vos vérifications, vos maintenances, vos contrats de services et vos plans d'actions selon vos besoins.
               <br />Vous disposez de reporting simples et clairs
               Nous vous proposons des axes d'amélioration et d'optimisation
@@ -42,7 +42,7 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
               alt="solutions sur mesure pour répondre aux besoins spécifiques"
               className="img-solutions"
             />
-            <h2><span className="number-mission">02.</span>Des solutions sur-mesure pour répondre à vos besoins spécifiques</h2>
+            <h2 className="solution-heading"><span className="number-mission">02.</span>Des solutions sur-mesure pour répondre à vos besoins spécifiques</h2>
             <p>Registre de sécurité, mise à jour et reconstitution de dossier SSI, notice de sécurité incendie, suivi de travaux d'aménagement, mise en place de vos contrats de vérifications, mise en place de vos contrats de maintenance, étude de faisabilité travaux, assistance achat matériel de sécurité, formation, audit d'installation technique, 
               mise à jour plans d'intervention et d'évacuation et d'autres services.</p>
           </div>
@@ -53,7 +53,7 @@ function MissionsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
               alt="pompiers utilise la fiche d'intervention rapide SSI incendie"
               className="img-solutions"
             />
-            <h2>
+            <h2 className="solution-heading">
               <span className="number-mission">03.</span>Facilitez l'intervention des secours dans votre établissement avec la FIRE <sup><Image src="/images/logo_fire-3.webp" alt="Icone" width={19} height={19} style={{display: 'inline'}} /></sup>
             </h2>
             <p>Développée par le SDIS 76, la Fiche d'Intervention Rapide Etablissement (FIRE) permet aux sapeurs-pompiers d'identifier rapidement vos points sensibles pour intervenir efficacement et en sécurité.
@@ -93,7 +93,7 @@ export default function Missions() {
     <section className="missions" id="mssns">
       <div className="full-container-mission">
         <div className="left-mission">
-          <h3 className="titre-section-missions">NOS MISSIONS</h3>
+          <h3 className="titre-section-missions solution-subtitle">NOS SOLUTIONS</h3>
           <Image
             src="/images/hero-img-sc.jpg"
             alt="deux chargés d'affaire Btry en mission SSI dans un ERP en construction pour la sécurité incendie"
@@ -114,7 +114,7 @@ export default function Missions() {
                     width={55}
                     height={55}
                   />
-                  <h2>Assistance à exploitation</h2>
+                  <h2 className="solution-heading">Assistance à exploitation</h2>
                 </div>
                 <button className="accordion-button">
                   <span className="plus-icon">{activeAccordion === 'assistance' ? '−' : '+'}</span>
@@ -143,7 +143,7 @@ export default function Missions() {
                     width={55}
                     height={55}
                   />
-                  <h2>Assistance à maîtrise d'ouvrage technique</h2>
+                  <h2 className="solution-heading">Assistance à maîtrise d'ouvrage technique</h2>
                 </div>
                 <button className="accordion-button">
                   <span className="plus-icon">{activeAccordion === 'AMO' ? '−' : '+'}</span>
@@ -169,7 +169,7 @@ export default function Missions() {
                     width={55}
                     height={55}
                   />
-                  <h2>Audit et diagnostic</h2>
+                  <h2 className="solution-heading">Audit et diagnostic</h2>
                 </div>
                 <button className="accordion-button">
                   <span className="plus-icon">{activeAccordion === 'audit' ? '−' : '+'}</span>
@@ -195,7 +195,7 @@ export default function Missions() {
                     width={55}
                     height={55}
                   />
-                  <h2>Coordination SSI</h2>
+                  <h2 className="solution-heading">Coordination SSI</h2>
                 </div>
                 <button className="accordion-button">
                   <span className="plus-icon">{activeAccordion === 'coordination' ? '−' : '+'}</span>
@@ -218,7 +218,7 @@ export default function Missions() {
                     width={55}
                     height={55}
                   />
-                  <h2>Délégation des responsabilités</h2>
+                  <h2 className="solution-heading">Délégation des responsabilités</h2>
                 </div>
                 <button className="accordion-button">
                   <span className="plus-icon">{activeAccordion === 'delegation' ? '−' : '+'}</span>

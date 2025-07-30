@@ -21,7 +21,6 @@ export default function FormationHero() {
     gsap.set([".formation-logo-btry", ".formation-paragraphe-hero"], { opacity: 0, y: 30 })
     gsap.set(".formation-etiquette:not(:last-child)", { opacity: 0, scale: 0.9 })
     gsap.set(".formation-etiquette:last-child", { opacity: 0, scale: 0.8, force3D: true })
-    gsap.set(".formation-contact-btn", { opacity: 0, scale: 0.8 })
     gsap.set(".formation-img-hero", { opacity: 0, scale: 0.95 })
 
     // Forcer l'invisibilité du bouton + via CSS aussi
@@ -59,12 +58,6 @@ export default function FormationHero() {
         duration: 0.5,
         ease: "back.out(1.7)"
       }, "-=0.1")
-      .to(".formation-contact-btn", { 
-        opacity: 1, 
-        scale: 1,
-        duration: 0.5,
-        ease: "back.out(1.7)"
-      }, "-=0.3")
       .to(".formation-img-hero", { 
         opacity: 1, 
         scale: 1,
