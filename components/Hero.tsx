@@ -68,7 +68,7 @@ export default function Hero() {
           />
         </div>
         <nav>
-          <ul className="nav-list">
+          <ul className="solution-nav-list">
             <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}>À propos</a></li>
             <li className="dropdown">
               <a href="#mssns" onClick={(e) => { e.preventDefault(); scrollToSection('mssns'); }}>Nos missions</a>
