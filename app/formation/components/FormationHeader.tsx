@@ -162,7 +162,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                       <li>
                         <Link
                           href="/formation/prevention-risques"
-                          className="block py-2 px-4 text-sm text-gray-500 hover:text-[#002768] hover:bg-blue-25 rounded transition-all duration-200"
+                          className="block py-2 px-4 text-base font-medium text-gray-700 hover:text-[#002768] hover:bg-blue-25 rounded transition-all duration-200"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           Prévention des risques et formations spécifiques
@@ -171,7 +171,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                       <li>
                         <Link
                           href="/formation/bilan-competences"
-                          className="block py-2 px-4 text-sm text-gray-500 hover:text-[#002768] hover:bg-blue-25 rounded transition-all duration-200"
+                          className="block py-2 px-4 text-base font-medium text-gray-700 hover:text-[#002768] hover:bg-blue-25 rounded transition-all duration-200"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           Bilan de compétences et VAE
@@ -180,7 +180,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
                       <li>
                         <Link
                           href="/formation/formation-continue"
-                          className="block py-2 px-4 text-sm text-gray-500 hover:text-[#002768] hover:bg-blue-25 rounded transition-all duration-200"
+                          className="block py-2 px-4 text-base font-medium text-gray-700 hover:text-[#002768] hover:bg-blue-25 rounded transition-all duration-200"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           Formation continue

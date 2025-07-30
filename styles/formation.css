@@ -75,6 +75,41 @@
 
 /* Mobile: gap réduit pour plus de largeur aux cartes */
 @media screen and (max-width: 640px) {
+  /* Réduire le padding de la card principale sur mobile */
+  #about .bg-white.rounded-3xl {
+    padding: 1.5rem !important;
+  }
+  
+  /* Ajouter margin après la section about */
+  #about {
+    margin-bottom: 2rem !important;
+  }
+  
+  /* Empêcher que l'image dépasse de la card */
+  .about-image-container {
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  
+  .about-image-container .about-image {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 100% !important;
+    min-height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    transform: none !important;
+    object-fit: cover !important;
+    border-radius: 1.5rem !important;
+    margin: 0 !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  }
+  
   .about-values-grid {
     gap: 1.8rem !important;
     justify-items: center !important;
@@ -116,31 +151,6 @@
     font-size: 0.75rem !important;
   }
   
-  .about-image-container .about-image {
-    width: 110% !important;
-    height: 110% !important;
-    min-width: 110% !important;
-    min-height: 110% !important;
-    max-width: none !important;
-    max-height: none !important;
-    transform: scale(1.1) !important;
-    object-fit: cover !important;
-    border-radius: 1.5rem !important;
-    margin: -5% !important;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
-  }
-  
-  .about-image-container {
-    overflow: hidden !important;
-    width: 120% !important;
-    max-width: 120% !important;
-    height: 120% !important;
-    border-radius: 1.5rem !important;
-    position: relative !important;
-    margin: -10% auto 0 auto !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-  }
 }
 
 @layer utilities {
