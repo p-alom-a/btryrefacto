@@ -61,4 +61,35 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.btry.fr/solution</loc>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.btry.fr/formation</loc>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.btry.fr/formation" />
+  </url>
+  <url>
+    <loc>https://www.btry.fr/formation/prevention-risques</loc>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.btry.fr/formation/bilan-competences</loc>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.btry.fr/formation/formation-continue</loc>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

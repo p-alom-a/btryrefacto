@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import CoursesList from '../components/CoursesList';
 
+
 export default function CategoryPage() {
   const params = useParams();
   const category = params.category as string;
