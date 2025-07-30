@@ -115,7 +115,7 @@ const FormationsSection: React.FC = () => {
           <div className="w-full">
             
             <div ref={titleRef} className="fade-in-up text-center mb-20 px-8">
-              <h2 className="text-5xl lg:text-6xl font-light text-gray-900 mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light text-gray-900 mb-8 leading-tight">
                 Nos <span className="text-blue-900 font-normal">formations</span>
               </h2>
             </div>
@@ -172,65 +172,52 @@ const FormationsSection: React.FC = () => {
               ))}
             </div>
 
-            <div className="lg:hidden space-y-6 w-full px-8">
+            <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6 w-full px-4">
               {formations.map((formation, index) => (
                 <div 
                   key={`mobile-${index}`}
                   ref={el => { mobileCardsRef.current[index] = el; }}
-                  className="fade-in-up bg-blue-50 rounded-2xl overflow-hidden"
+                  className="fade-in-up bg-blue-50 rounded-2xl p-6 flex flex-col h-full"
                 >
-                  <button 
-                    onClick={() => toggleAccordion(index)}
-                    className="w-full flex items-center justify-between p-8 text-left"
-                  >
-                    <div className="flex items-center space-x-6">
-                      <div className="w-28 h-28 flex items-center justify-center flex-shrink-0">
-                        <img 
-                          src={formation.image} 
-                          alt={`${formation.title} icon`}
-                          className="w-24 h-24 rounded-xl object-cover"
-                        />
-                      </div>
-                      <h3 className="text-xl font-semibold text-gray-900 pr-4">
-                        {formation.title === "Bilan de compétences et VAE" ? (
-                          <>Bilan de compétences<br />et VAE</>
-                        ) : (
-                          formation.title
-                        )}
-                      </h3>
-                    </div>
-                    {openAccordion === index ? (
-                      <Minus className="w-6 h-6 text-gray-600 flex-shrink-0" />
-                    ) : (
-                      <Plus className="w-6 h-6 text-gray-600 flex-shrink-0" />
-                    )}
-                  </button>
+                  <div className="w-full flex justify-center mb-4">
+                    <img 
+                      src={formation.image} 
+                      alt={`${formation.title} icon`}
+                      className="w-16 h-16 rounded-xl object-cover"
+                    />
+                  </div>
                   
-                  <div className={`accordion-content ${openAccordion === index ? 'open' : ''}`}>
-                    <div className="px-8 pb-8">
-                      <p className="text-gray-600 leading-relaxed text-base mb-6">
-                        {formation.description}
-                      </p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 text-center leading-tight">
+                    {formation.title === "Bilan de compétences et VAE" ? (
+                      <>Bilan de compétences<br />et VAE</>
+                    ) : (
+                      formation.title
+                    )}
+                  </h3>
+                  
+                  <p className="text-gray-600 leading-relaxed mb-4 text-sm flex-grow text-center">
+                    {formation.description}
+                  </p>
 
-                      <div className="flex flex-wrap gap-3 mb-6">
-                        {formation.tags.map((tag, tagIndex) => (
-                          <span 
-                            key={tagIndex}
-                            className="px-4 py-2 bg-blue-100 text-blue-800 text-sm font-medium rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      <Link 
-                        href={`/formation/${formation.slug}`}
-                        className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-lg"
+                  <div className="flex flex-wrap gap-2 mb-4 justify-center">
+                    {formation.tags.map((tag, tagIndex) => (
+                      <span 
+                        key={tagIndex}
+                        className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full"
                       >
-                        En voir plus
-                        <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      </Link>
-                    </div>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-auto flex justify-center">
+                    <Link 
+                      href={`/formation/${formation.slug}`}
+                      className="group inline-flex items-center text-blue-900 font-medium hover:text-blue-800 transition-colors text-sm"
+                    >
+                      En voir plus
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
                   </div>
                 </div>
               ))}

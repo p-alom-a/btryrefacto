@@ -27,6 +27,122 @@
 }
 
 /* ------------------------------------------
+   ABOUT SECTION RESPONSIVE STYLES
+------------------------------------------ */
+
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+/* Image about - styles de base pour tous les écrans */
+.about-image {
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-image-container {
+  border-radius: 1.5rem;
+}
+
+/* Desktop: image alignée avec le texte */
+@media screen and (min-width: 1024px) {
+  .about-image-container {
+    height: 400px;
+    width: 100%;
+    max-width: 450px;
+  }
+  
+  .about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Desktop: 4 colonnes */
+@media screen and (min-width: 1024px) {
+  .about-values-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Mobile: gap réduit pour plus de largeur aux cartes */
+@media screen and (max-width: 640px) {
+  .about-values-grid {
+    gap: 1.8rem !important;
+    justify-items: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  
+  .about-value-card {
+    padding: 1rem !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  
+  .about-icon {
+    width: 3rem !important;
+    height: 3rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .about-icon svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+  
+  .about-title {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .about-description {
+    font-size: 0.75rem !important;
+  }
+  
+  .about-image-container .about-image {
+    width: 110% !important;
+    height: 110% !important;
+    min-width: 110% !important;
+    min-height: 110% !important;
+    max-width: none !important;
+    max-height: none !important;
+    transform: scale(1.1) !important;
+    object-fit: cover !important;
+    border-radius: 1.5rem !important;
+    margin: -5% !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  }
+  
+  .about-image-container {
+    overflow: hidden !important;
+    width: 120% !important;
+    max-width: 120% !important;
+    height: 120% !important;
+    border-radius: 1.5rem !important;
+    position: relative !important;
+    margin: -10% auto 0 auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* ------------------------------------------
    FORMATION HERO RESPONSIVE STYLES
 ------------------------------------------ */
 
