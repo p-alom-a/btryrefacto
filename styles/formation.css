@@ -75,6 +75,11 @@
 
 /* Mobile: gap réduit pour plus de largeur aux cartes */
 @media screen and (max-width: 640px) {
+  /* Réduire les marges globales des sections en mobile */
+  .max-w-7xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
   /* Réduire le padding de la card principale sur mobile */
   #about .bg-white.rounded-3xl {
     padding: 1.5rem !important;
