@@ -1,4 +1,4 @@
-import './formation.css';
+import '../../styles/formation.css';
 import FormationHeader from './components/FormationHeader';
 
 export default function FormationLayout({ children }: { children: React.ReactNode }) {
