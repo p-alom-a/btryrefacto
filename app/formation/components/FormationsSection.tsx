@@ -230,7 +230,7 @@ const FormationsSection: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-16 lg:p-24">
             <div className="grid md:grid-cols-2 gap-16 items-start max-w-6xl mx-auto">
-              <div className="text-right">
+              <div className="text-left md:text-right">
                 <h3 className="text-2xl font-medium text-gray-900 leading-tight">
                   L'ensemble de nos formations sont accessibles aux personnes en situation d'handicap.
                 </h3>

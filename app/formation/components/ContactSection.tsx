@@ -53,6 +53,7 @@ const ContactSection: React.FC = () => {
   const titleRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const mobileImageRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
 
   const [formData, setFormData] = useState<FormData>({
@@ -154,6 +155,9 @@ const ContactSection: React.FC = () => {
       if (imageRef.current) {
         setTimeout(() => imageRef.current?.classList.add('animate'), 500);
       }
+      if (mobileImageRef.current) {
+        setTimeout(() => mobileImageRef.current?.classList.add('animate'), 200);
+      }
     };
 
     return () => {
@@ -171,13 +175,23 @@ const ContactSection: React.FC = () => {
           <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 lg:p-16">
             
             <div ref={titleRef} className="fade-in-up text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-light text-gray-900 mb-8 leading-tight">
-                Contactez <img src="/images/formation/logo.png" alt="btry formation" className="inline-block h-12 lg:h-16 mx-2" />
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-gray-900 mb-8 leading-tight">
+                Contactez <img src="/images/formation/logo.png" alt="btry formation" className="inline-block h-10 sm:h-12 lg:h-16 mx-2" />
               </h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto font-light">
+              <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto font-light">
                 Une question sur nos formations ? Besoin d'un accompagnement personnalisé ? 
                 Nous sommes là pour vous aider.
               </p>
+            </div>
+
+            <div ref={mobileImageRef} className="fade-in-up lg:hidden mb-8">
+              <div className="relative h-64">
+                <img 
+                  src="/images/formation/illustration-contact.jpg" 
+                  alt="Équipe btry formation" 
+                  className="w-full h-full object-cover rounded-2xl shadow-xl"
+                />
+              </div>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-16">
@@ -292,7 +306,7 @@ const ContactSection: React.FC = () => {
                         name="message"
                         value={formData.message}
                         onChange={handleInputChange}
-                        rows={4}
+                        rows={10}
                         className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
                         placeholder="Décrivez votre projet de formation..."
                       />
@@ -339,7 +353,7 @@ const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              <div ref={imageRef} className="fade-in-right">
+              <div ref={imageRef} className="fade-in-right hidden lg:block">
                 <div className="relative h-full">
                   <img 
                     src="/images/formation/illustration-contact.jpg" 
