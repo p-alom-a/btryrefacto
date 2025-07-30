@@ -80,11 +80,11 @@ export default function FormationHero() {
   }, [])
 
   return (
-    <div className="flex justify-center items-center w-full min-h-screen flex-wrap p-4 rounded-[20px] box-border">
-      <div className="flex flex-row justify-center items-center gap-14 w-full pr-0 pl-4 -mt-16">
-        <div className="flex flex-col justify-center items-center">
-          <div className="flex flex-col gap-8 w-[40rem]">
-            <div className="flex flex-row w-auto">
+    <div className="formation-hero-main-container flex justify-center items-center w-full min-h-screen flex-wrap p-4 rounded-[20px] box-border max-md:pt-32">
+      <div className="formation-hero-container flex flex-row justify-center items-center gap-14 w-full pr-0 pl-4 -mt-16 max-md:mt-24">
+        <div className="formation-text-container flex flex-col justify-center md:items-start items-center">
+          <div className="flex flex-col gap-8 w-[40rem] max-w-full md:items-start items-center">
+            <div className="flex flex-row w-auto md:justify-start justify-center">
               <Image
                 src="/images/formation/logo.png"
                 alt="logo btry formations"
@@ -94,12 +94,12 @@ export default function FormationHero() {
               />
             </div>
             
-            <h1 className="formation-paragraphe-hero font-primary text-[26px] font-light m-0 mt-4 opacity-0">
+            <h1 className="formation-paragraphe-hero font-primary text-[26px] font-light m-0 mt-4 opacity-0 md:text-left text-center">
               Développez vos compétences <br className="hidden sm:inline" />
               avec nos formations professionnelles
             </h1>
             
-            <div className="flex flex-row flex-wrap w-[85%]">
+            <div className="formation-etiquettes-container flex flex-row flex-wrap w-[85%] md:justify-start justify-center">
               <span className="formation-etiquette rounded-[11px] px-[17px] py-[2px] font-normal text-base no-underline font-primary mr-4 mb-4 border border-[#002768] text-[#002768] max-w-[300px] text-center box-border transition-all duration-300 cursor-pointer relative overflow-hidden opacity-0">
                 Prévention des risques
               </span>

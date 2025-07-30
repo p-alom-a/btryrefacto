@@ -19,6 +19,7 @@ Migration complète du site web BTRY Solutions (bureau d'études en sécurité i
 - **Next.js 14** : Framework React avec App Router
 - **TypeScript** : Typage statique pour la robustesse
 - **CSS Modules** : Styles composants isolés
+- **Tailwind CSS** : Framework CSS utilitaire (approche hybride)
 - **Framer Motion** : Animations fluides
 - **React Hook Form** : Gestion des formulaires
 - **EmailJS** : Envoi de formulaires par email
@@ -53,6 +54,9 @@ Le projet est configuré pour un déploiement optimal sur Vercel :
 ```
 btry-nextjs/
 ├── app/
+│   ├── formation/          # Section Formation (approche hybride)
+│   │   ├── components/     # Composants spécifiques
+│   │   └── formation.css   # Styles CSS personnalisés
 │   ├── layout.tsx          # Layout global
 │   ├── page.tsx            # Page d'accueil
 │   └── globals.css         # Styles globaux
@@ -66,7 +70,7 @@ btry-nextjs/
 ├── public/
 │   └── images/            # Assets images
 ├── styles/
-│   └── globals.css        # Styles CSS
+│   └── homepage.css       # Styles CSS homepage
 └── vercel.json            # Configuration Vercel
 ```
 
@@ -112,6 +116,47 @@ Le design est entièrement responsive avec des breakpoints optimisés :
 - Mobile : < 768px
 - Tablet : 768px - 1024px
 - Desktop : > 1024px
+
+## 🔄 Approche Hybride CSS/Tailwind
+
+Le projet utilise une **migration progressive** avec une approche hybride :
+
+### Homepage (CSS pur)
+- Utilise des styles CSS traditionnels (`styles/homepage.css`)
+- Composants avec classes CSS personnalisées
+- Media queries CSS pour le responsive
+
+### Section Formation (Hybride)
+- **Structure de base** : Tailwind CSS dans les composants React
+- **Responsive mobile** : CSS personnalisé avec `!important` (`app/formation/formation.css`)
+- **Pourquoi cette approche ?**
+  - Migration progressive de CSS vers Tailwind
+  - Contrôle précis sur les breakpoints complexes
+  - Cohabitation harmonieuse des deux approches
+  - Flexibilité maximale pendant la transition
+
+```tsx
+// Exemple d'approche hybride
+<div className="flex justify-center items-center w-full formation-hero-container">
+  <Image className="formation-logo-btry w-auto h-[8vw] opacity-0" />
+</div>
+```
+
+```css
+/* CSS spécialisé pour mobile */
+@media screen and (max-width: 768px) {
+  .formation-logo-btry {
+    height: 22vw !important;
+    margin: 0 auto !important;
+  }
+  .formation-hero-container {
+    flex-direction: column !important;
+    margin-top: 8rem !important;
+  }
+}
+```
+
+Cette approche permet une **migration en douceur** tout en conservant la précision des styles CSS pour les cas complexes.
 
 ## 🚀 Performance
 

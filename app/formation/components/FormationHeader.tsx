@@ -22,7 +22,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
   return (
     <header className={`
       flex items-center justify-between w-full mx-auto box-border text-white
-      px-[50px] py-0 mt-14
+      px-[50px] py-0 mt-14 max-md:px-8 max-md:mt-8
       ${isScrolled ? 'scrolled' : ''}
     `}>
       {/* Logo */}
@@ -33,7 +33,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
             alt="btry logo"
             width={120}
             height={60}
-            className="w-auto h-12 max-w-full object-contain lg:h-[50px]"
+            className="w-auto h-7 max-w-full object-contain md:h-8 lg:h-12"
           />
         </Link>
       </div>

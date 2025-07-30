@@ -102,6 +102,12 @@ header {
   }
 }
 
+@media (max-width: 768px) {
+  .logo-img{
+    height: 26px;
+  }
+}
+
 .logo-btry-solution {
   width: auto;
   height: 8vw; /* Utilisation d'unités vw pour adapter la hauteur à la taille de l'écran */
