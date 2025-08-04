@@ -2,8 +2,9 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Clock, Users, Award, BookOpen, AlertCircle, CheckCircle } from 'lucide-react';
-import { useCourseDetails, CourseDetail, FormationContinueCourse, PreventionCourse, BilanCompetenceCourse, VaeCourse } from '../hooks/useCourseDetails';
+import Link from 'next/link';
+import { Clock, Users, Award, BookOpen, AlertCircle } from 'lucide-react';
+import { useSupabaseData, FormationContinueCourse, PreventionCourse, BilanCompetenceCourse, VaeCourse } from '../hooks/useSupabaseData';
 import { getImageForCourse } from '../config/imageBank';
 
 interface CourseDetailsProps {
@@ -12,7 +13,7 @@ interface CourseDetailsProps {
 }
 
 const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => {
-  const { course, loading, error } = useCourseDetails(category, courseId);
+  const { course, loading, error } = useSupabaseData(category, courseId);
 
   if (loading) {
     return (
@@ -177,25 +178,31 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
       )}
 
       {/* Statistiques */}
-      {(course.taux_reussite || course.taux_satisfaction || course.taux_insertion) && (
+      {(course.taux_reussite !== undefined || course.taux_satisfaction !== undefined || course.taux_insertion) && (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Statistiques</h2>
           <div className="grid md:grid-cols-3 gap-4">
-            {course.taux_reussite && (
+            {course.taux_reussite !== undefined && (
               <div className="bg-green-50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-green-600">{course.taux_reussite}</div>
+                <div className="text-2xl font-bold text-green-600">
+                  {(!course.taux_reussite || parseFloat(String(course.taux_reussite)) === 0) ? "(en cours)" : course.taux_reussite}
+                </div>
                 <div className="text-sm text-gray-600">Taux de réussite</div>
               </div>
             )}
-            {course.taux_satisfaction && (
+            {course.taux_satisfaction !== undefined && (
               <div className="bg-blue-50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-blue-600">{course.taux_satisfaction}</div>
+                <div className="text-2xl font-bold text-blue-600">
+                  {(!course.taux_satisfaction || parseFloat(String(course.taux_satisfaction)) === 0) ? "(en cours)" : course.taux_satisfaction}
+                </div>
                 <div className="text-sm text-gray-600">Taux de satisfaction</div>
               </div>
             )}
-            {course.taux_insertion && (
+            {course.taux_insertion !== undefined && (
               <div className="bg-purple-50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-purple-600">{course.taux_insertion}</div>
+                <div className="text-2xl font-bold text-purple-600">
+                  {(!course.taux_insertion || parseFloat(String(course.taux_insertion)) === 0) ? "(en cours)" : course.taux_insertion}
+                </div>
                 <div className="text-sm text-gray-600">Taux d'insertion</div>
               </div>
             )}
@@ -301,6 +308,31 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
           <div className="prose prose-sm max-w-none text-gray-700" dangerouslySetInnerHTML={{ __html: course.documents_delivres }} />
         </div>
       )}
+
+      {/* Statistiques */}
+      {(course.taux_reussite !== undefined || course.taux_satisfaction !== undefined) && (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Statistiques</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {course.taux_reussite !== undefined && (
+              <div className="bg-green-50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-green-600">
+                  {(!course.taux_reussite || parseFloat(String(course.taux_reussite)) === 0) ? "(en cours)" : course.taux_reussite}
+                </div>
+                <div className="text-sm text-gray-600">Taux de réussite</div>
+              </div>
+            )}
+            {course.taux_satisfaction !== undefined && (
+              <div className="bg-blue-50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-blue-600">
+                  {(!course.taux_satisfaction || parseFloat(String(course.taux_satisfaction)) === 0) ? "(en cours)" : course.taux_satisfaction}
+                </div>
+                <div className="text-sm text-gray-600">Taux de satisfaction</div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 
@@ -396,6 +428,31 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
           </div>
         </div>
       )}
+
+      {/* Statistiques */}
+      {(course.taux_reussite !== undefined || course.taux_satisfaction !== undefined) && (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Statistiques</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {course.taux_reussite !== undefined && (
+              <div className="bg-green-50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-green-600">
+                  {(!course.taux_reussite || parseFloat(String(course.taux_reussite)) === 0) ? "(en cours)" : course.taux_reussite}
+                </div>
+                <div className="text-sm text-gray-600">Taux de réussite</div>
+              </div>
+            )}
+            {course.taux_satisfaction !== undefined && (
+              <div className="bg-blue-50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-blue-600">
+                  {(!course.taux_satisfaction || parseFloat(String(course.taux_satisfaction)) === 0) ? "(en cours)" : course.taux_satisfaction}
+                </div>
+                <div className="text-sm text-gray-600">Taux de satisfaction</div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 
@@ -479,6 +536,31 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
           })}
         </div>
       </div>
+
+      {/* Statistiques */}
+      {(course.taux_reussite !== undefined || course.taux_satisfaction !== undefined) && (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Statistiques</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {course.taux_reussite !== undefined && (
+              <div className="bg-green-50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-green-600">
+                  {(!course.taux_reussite || parseFloat(String(course.taux_reussite)) === 0) ? "(en cours)" : course.taux_reussite}
+                </div>
+                <div className="text-sm text-gray-600">Taux de réussite</div>
+              </div>
+            )}
+            {course.taux_satisfaction !== undefined && (
+              <div className="bg-blue-50 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-blue-600">
+                  {(!course.taux_satisfaction || parseFloat(String(course.taux_satisfaction)) === 0) ? "(en cours)" : course.taux_satisfaction}
+                </div>
+                <div className="text-sm text-gray-600">Taux de satisfaction</div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 
@@ -503,9 +585,9 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
       
       {/* Action buttons */}
       <div className="mt-8 flex justify-center space-x-4">
-        <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-          Demander un devis
-        </button>
+        <Link href="/formation#contact" className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors inline-block text-center">
+          Contact
+        </Link>
         <button className="bg-gray-100 text-gray-700 px-8 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors">
           Télécharger la fiche
         </button>

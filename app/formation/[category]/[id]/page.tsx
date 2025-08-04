@@ -29,26 +29,11 @@ export default function CourseDetailPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Navigation breadcrumb */}
+        {/* Navigation simple */}
         <div className="mb-8">
-          <nav className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link href="/formation" className="hover:text-blue-600 transition-colors">
-              Formations
-            </Link>
-            <span>/</span>
-            <Link 
-              href={`/formation/${category}`} 
-              className="hover:text-blue-600 transition-colors"
-            >
-              {getCategoryTitle(category)}
-            </Link>
-            <span>/</span>
-            <span className="text-gray-900">Détails du cours</span>
-          </nav>
-          
           <Link 
             href={`/formation/${category}`}
-            className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-800 transition-colors"
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Retour à la liste

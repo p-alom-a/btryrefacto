@@ -23,7 +23,7 @@ export const imageBank: ImageBank = {
     ],
     'sst': [
       '/images/formation/prevention/sst/sst-1.jpg',
-      '/images/formation/prevention/sst/sst-2.jpg',
+      '/images/formation/prevention/sst/sst-2.png',
       '/images/formation/prevention/sst/sst-3.jpg',
     ],
     default: '/images/formation/hero-preventionrisques.png' // Image actuelle en fallback

@@ -6,59 +6,275 @@ import { supabase } from '../../../lib/supabase';
 export type Course = {
   id: number;
   titre: string;
+  code_formation?: string;
+
+  // Champs communs
+  taux_reussite?: number | string;
+  taux_satisfaction?: number | string;
+  prerequis?: string;
+  modalites_evaluation?: string | string[];
+  delai_acces?: string;
+  delais_acces?: string;
+  created_at?: string;
+  updated_at?: string;
+
+  // Formation Continue
   niveau_qualification?: string;
-  duree_centre?: string;
-  duree_entreprise?: string;
+  code_rncp?: string;
+  modalite?: string;
+  duree_centre?: number;
+  duree_entreprise?: number;
+  objectifs_generaux?: string;
+  objectifs_specifiques?: string[];
+  blocs?: any;
+  missions?: string[];
+  moyens_pedagogiques?: string[];
+  outils_numeriques?: string[];
+  modalite_validation?: string;
+  modalites_acces?: string;
+  accessibilite_handicap?: boolean;
+  taux_insertion?: number;
+  public?: string[];
+  accompagnement?: string;
+  remediation?: string[];
+
+  // Prévention
   duree_jours?: number;
+  personnes_concernees?: string;
+  niveau_prerequis?: string;
+  objectifs_pedagogiques?: string;
+  animation?: string;
+  pedagogie?: string;
+  documents_delivres?: string;
+  nombre_stagiaires_min?: number;
+  nombre_stagiaires_max?: number;
+  programme_theorique?: string;
+  programme_pratique?: string;
+
+  // Bilan de compétences
   duree_heures?: number;
+  objectifs?: string;
+  public_concerne?: string;
+  qualification_intervenants?: string;
+  duree?: string;
+  effectifs?: string;
+  phase_preliminaire?: string;
+  phase_investigation?: string;
+  phase_conclusion?: string;
+  suivi_6_mois?: string;
+  materiel_necessaire?: string;
+  tarif?: number;
+
+  // VAE
   duree_totale_heures?: number;
+  types_diplomes?: string;
+  diplomes_specifiques?: string;
+  format_intra?: boolean;
+  format_inter?: boolean;
+  format_individuel?: boolean;
+  format_groupe?: boolean;
+  modalites_presentiel?: boolean;
+  modalites_distance?: boolean;
+  modalites_mixte?: boolean;
+  numero_habilitation?: string;
+  code_cpf?: string;
+  code_rncp_vae?: string;
+  objectif_1_description?: string;
+  objectif_2_description?: string;
+  objectif_3_description?: string;
+  objectif_4_description?: string;
+  objectif_5_description?: string;
+  objectif_6_description?: string;
+  objectif_7_description?: string;
+  objectif_8_description?: string;
+  financement_cpf?: boolean;
+  financement_france_travail?: boolean;
+  intervenant_nom?: string;
+  consultant_nom?: string;
+  consultant_email?: string;
+  consultant_telephone?: string;
+  tarif_vae?: number;
+  tarif_type?: string;
 };
 
-export const useSupabaseData = (category: string) => {
+// Types pour spécialiser par catégorie (conservés de useCourseDetails)
+export type FormationContinueCourse = Course & {
+  niveau_qualification?: string;
+  code_rncp?: string;
+  modalite?: string;
+  duree_centre?: number;
+  duree_entreprise?: number;
+  objectifs_generaux?: string;
+  objectifs_specifiques?: string[];
+  blocs?: any;
+  missions?: string[];
+  moyens_pedagogiques?: string[];
+  outils_numeriques?: string[];
+  modalite_validation?: string;
+  modalites_acces?: string;
+  accessibilite_handicap?: boolean;
+  taux_insertion?: number;
+  public?: string[];
+  accompagnement?: string;
+  remediation?: string[];
+  categorie?: string;
+};
+
+export type PreventionCourse = Course & {
+  duree_jours?: number;
+  personnes_concernees?: string;
+  niveau_prerequis?: string;
+  objectifs_pedagogiques?: string;
+  animation?: string;
+  pedagogie?: string;
+  documents_delivres?: string;
+  nombre_stagiaires_min?: number;
+  nombre_stagiaires_max?: number;
+  programme_theorique?: string;
+  programme_pratique?: string;
+};
+
+export type BilanCompetenceCourse = Course & {
+  duree_heures?: number;
+  objectifs?: string;
+  public_concerne?: string;
+  qualification_intervenants?: string;
+  duree?: string;
+  effectifs?: string;
+  phase_preliminaire?: string;
+  phase_investigation?: string;
+  phase_conclusion?: string;
+  suivi_6_mois?: string;
+  materiel_necessaire?: string;
+  tarif?: number;
+};
+
+export type VaeCourse = Course & {
+  duree_totale_heures?: number;
+  types_diplomes?: string;
+  diplomes_specifiques?: string;
+  format_intra?: boolean;
+  format_inter?: boolean;
+  format_individuel?: boolean;
+  format_groupe?: boolean;
+  modalites_presentiel?: boolean;
+  modalites_distance?: boolean;
+  modalites_mixte?: boolean;
+  numero_habilitation?: string;
+  code_cpf?: string;
+  code_rncp_vae?: string;
+  [key: string]: any; // Pour les champs dynamiques VAE
+};
+
+export type CourseDetail = FormationContinueCourse | PreventionCourse | BilanCompetenceCourse | VaeCourse;
+
+export const useSupabaseData = (category: string, courseId?: string) => {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [course, setCourse] = useState<CourseDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchCourses = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
 
         let query;
-        let selectFields = 'titre, id';
+        let selectFields = '';
+        const isDetailMode = !!courseId;
+
+        if (isDetailMode) {
+          // Mode détail : récupérer un cours spécifique
+          const id = parseInt(courseId);
+          if (isNaN(id)) {
+            throw new Error('ID de cours invalide');
+          }
+        }
 
         switch (category) {
           case 'formation-continue':
-            selectFields = 'titre, id, niveau_qualification, duree_centre, duree_entreprise';
+            selectFields = `
+              id, titre, code_formation, niveau_qualification, code_rncp, modalite,
+              duree_centre, duree_entreprise, objectifs_generaux, objectifs_specifiques,
+              blocs, missions, moyens_pedagogiques, outils_numeriques, modalites_evaluation,
+              modalite_validation, modalites_acces, delai_acces, accessibilite_handicap,
+              taux_reussite, taux_satisfaction, taux_insertion, public, prerequis,
+              accompagnement, remediation, created_at, updated_at
+            `;
             query = supabase
               .from('formation_continue_courses')
-              .select(selectFields)
-              .order('titre');
+              .select(selectFields);
+            
+            if (isDetailMode) {
+              query = query.eq('id', parseInt(courseId)).single();
+            } else {
+              query = query.order('titre');
+            }
             break;
 
           case 'prevention-risques':
-            selectFields = 'titre, id, duree_jours';
+            selectFields = `
+              id, titre, code_formation, duree_jours, personnes_concernees,
+              niveau_prerequis, objectifs_pedagogiques, animation, pedagogie,
+              modalites_evaluation, documents_delivres, nombre_stagiaires_min,
+              nombre_stagiaires_max, programme_theorique, programme_pratique,
+              taux_reussite, taux_satisfaction, created_at, updated_at
+            `;
             query = supabase
               .from('prevention_courses')
-              .select(selectFields)
-              .order('titre');
+              .select(selectFields);
+            
+            if (isDetailMode) {
+              query = query.eq('id', parseInt(courseId)).single();
+            } else {
+              query = query.order('titre');
+            }
             break;
 
           case 'bilan-competences':
-            selectFields = 'titre, id, duree_heures';
+            selectFields = `
+              id, titre, code_formation, objectifs, public_concerne, prerequis,
+              qualification_intervenants, duree_heures, moyens_pedagogiques,
+              duree, effectifs, phase_preliminaire, phase_investigation,
+              phase_conclusion, suivi_6_mois, modalites_evaluation,
+              materiel_necessaire, delais_acces, accessibilite_handicap,
+              taux_reussite, taux_satisfaction, tarif, created_at, updated_at
+            `;
             query = supabase
               .from('bilan_competence_courses')
-              .select(selectFields)
-              .order('titre');
+              .select(selectFields);
+            
+            if (isDetailMode) {
+              query = query.eq('id', parseInt(courseId)).single();
+            } else {
+              query = query.order('titre');
+            }
             break;
 
           case 'vae':
-            selectFields = 'titre, id, duree_totale_heures';
+            selectFields = `
+              id, titre, code_formation, types_diplomes, diplomes_specifiques,
+              format_intra, format_inter, format_individuel, format_groupe,
+              modalites_presentiel, modalites_distance, modalites_mixte,
+              numero_habilitation, code_cpf, code_rncp, duree_totale_heures,
+              public_concerne, objectif_1_description, objectif_2_description,
+              objectif_3_description, objectif_4_description, objectif_5_description,
+              objectif_6_description, objectif_7_description, objectif_8_description,
+              delais_acces, financement_cpf, financement_france_travail,
+              financement_france_vae, intervenant_nom, consultant_nom,
+              consultant_email, consultant_telephone, tarif, tarif_type,
+              taux_reussite, taux_satisfaction, created_at, updated_at
+            `;
             query = supabase
               .from('vae_courses')
-              .select(selectFields)
-              .order('titre');
+              .select(selectFields);
+            
+            if (isDetailMode) {
+              query = query.eq('id', parseInt(courseId)).single();
+            } else {
+              query = query.order('titre');
+            }
             break;
 
           default:
@@ -68,10 +284,17 @@ export const useSupabaseData = (category: string) => {
         const { data, error } = await query;
 
         if (error) {
+          if (error.code === 'PGRST116' && isDetailMode) {
+            throw new Error('Cours non trouvé');
+          }
           throw error;
         }
 
-        setCourses((data as unknown as Course[]) || []);
+        if (isDetailMode) {
+          setCourse(data as unknown as CourseDetail);
+        } else {
+          setCourses((data as unknown as Course[]) || []);
+        }
       } catch (err) {
         console.error('Erreur lors de la récupération des cours:', err);
         setError(err instanceof Error ? err.message : 'Une erreur est survenue');
@@ -81,9 +304,9 @@ export const useSupabaseData = (category: string) => {
     };
 
     if (category) {
-      fetchCourses();
+      fetchData();
     }
-  }, [category]);
+  }, [category, courseId]);
 
-  return { courses, loading, error };
+  return { courses, course, loading, error };
 };
