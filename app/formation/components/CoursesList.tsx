@@ -193,9 +193,6 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
               fill
               className="object-cover"
             />
-            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-md">
-              {getIcon(category)}
-            </div>
           </div>
           
           <div className="p-6 sm:p-8">

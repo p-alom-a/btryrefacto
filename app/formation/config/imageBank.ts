@@ -22,9 +22,9 @@ export const imageBank: ImageBank = {
       // '/images/formation/prevention/securite-incendie/incendie-2.jpg',
     ],
     'sst': [
-      // À remplir après upload des images
-      // '/images/formation/prevention/sst/sst-1.jpg',
-      // '/images/formation/prevention/sst/sst-2.jpg',
+      '/images/formation/prevention/sst/sst-1.jpg',
+      '/images/formation/prevention/sst/sst-2.jpg',
+      '/images/formation/prevention/sst/sst-3.jpg',
     ],
     default: '/images/formation/hero-preventionrisques.png' // Image actuelle en fallback
   },
