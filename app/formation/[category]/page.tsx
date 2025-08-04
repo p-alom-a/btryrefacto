@@ -34,7 +34,7 @@ export default function CategoryPage() {
       <div className="max-w-7xl mx-auto px-4 pt-32 pb-12">
 
         {/* Hero Section avec image */}
-        <div className="relative mb-16 overflow-hidden rounded-[20px] bg-blue-50 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div className="relative mb-24 overflow-hidden rounded-[20px] bg-blue-50 shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[400px] p-8 lg:p-12">
             {/* Contenu texte */}
             <div className="order-2 lg:order-1 space-y-6">

@@ -59,6 +59,46 @@ export const imageBank: ImageBank = {
 // Index pour éviter les répétitions
 let imageIndex = 0;
 
+// Fonction utilitaire pour déterminer la sous-catégorie d'un cours
+export function getCourseSubcategory(category: string, courseTitle: string): string {
+  const title = courseTitle.toLowerCase();
+  
+  if (category === 'prevention-risques') {
+    if (title.includes('habilitation') || title.includes('électrique') || title.includes('electrique')) {
+      return 'habilitation-electrique';
+    }
+    if (title.includes('incendie') || title.includes('feu') || title.includes('évacuation')) {
+      return 'securite-incendie';
+    }
+    if (title.includes('sst') || title.includes('secours') || title.includes('premiers')) {
+      return 'sst';
+    }
+  }
+  
+  if (category === 'bilan-competences') {
+    if (title.includes('vae') || title.includes('validation')) {
+      return 'vae';
+    }
+    if (title.includes('bilan') || title.includes('compétence')) {
+      return 'bilan';
+    }
+  }
+  
+  if (category === 'formation-continue') {
+    if (title.includes('management') || title.includes('manager') || title.includes('équipe')) {
+      return 'management';
+    }
+    if (title.includes('bureautique') || title.includes('office') || title.includes('excel') || title.includes('word')) {
+      return 'bureautique';
+    }
+    if (title.includes('digital') || title.includes('numérique') || title.includes('informatique')) {
+      return 'digital';
+    }
+  }
+  
+  return 'autres';
+}
+
 // Fonction pour sélectionner une image basée sur le titre du cours
 export function getImageForCourse(category: string, courseTitle: string, courseId?: string): string {
   const categoryImages = imageBank[category];
@@ -67,95 +107,16 @@ export function getImageForCourse(category: string, courseTitle: string, courseI
     return '/images/formation/illustration-hero.png'; // Fallback général
   }
 
-  const title = courseTitle.toLowerCase();
+  const subcategory = getCourseSubcategory(category, courseTitle);
   
-  // Logique pour prévention des risques
-  if (category === 'prevention-risques') {
-    if (title.includes('habilitation') || title.includes('électrique') || title.includes('electrique')) {
-      const images = categoryImages['habilitation-electrique'];
-      if (images && images.length > 0) {
-        // Utilise l'ID du cours ou l'index pour une sélection déterministe
-        const index = courseId ? 
-          parseInt(courseId.toString().slice(-1)) % images.length : 
-          (imageIndex++) % images.length;
-        return images[index];
-      }
-    }
-    
-    if (title.includes('incendie') || title.includes('feu') || title.includes('évacuation')) {
-      const images = categoryImages['securite-incendie'];
-      if (images && images.length > 0) {
-        const index = courseId ? 
-          parseInt(courseId.toString().slice(-1)) % images.length : 
-          (imageIndex++) % images.length;
-        return images[index];
-      }
-    }
-    
-    if (title.includes('sst') || title.includes('secours') || title.includes('premiers')) {
-      const images = categoryImages['sst'];
-      if (images && images.length > 0) {
-        const index = courseId ? 
-          parseInt(courseId.toString().slice(-1)) % images.length : 
-          (imageIndex++) % images.length;
-        return images[index];
-      }
-    }
-  }
-  
-  // Logique pour bilan de compétences
-  if (category === 'bilan-competences') {
-    if (title.includes('vae') || title.includes('validation')) {
-      const images = categoryImages['vae'];
-      if (images && images.length > 0) {
-        const index = courseId ? 
-          parseInt(courseId.toString().slice(-1)) % images.length : 
-          (imageIndex++) % images.length;
-        return images[index];
-      }
-    }
-    
-    if (title.includes('bilan') || title.includes('compétence')) {
-      const images = categoryImages['bilan'];
-      if (images && images.length > 0) {
-        const index = courseId ? 
-          parseInt(courseId.toString().slice(-1)) % images.length : 
-          (imageIndex++) % images.length;
-        return images[index];
-      }
-    }
-  }
-  
-  // Logique pour formation continue
-  if (category === 'formation-continue') {
-    if (title.includes('management') || title.includes('manager') || title.includes('équipe')) {
-      const images = categoryImages['management'];
-      if (images && images.length > 0) {
-        const index = courseId ? 
-          parseInt(courseId.toString().slice(-1)) % images.length : 
-          (imageIndex++) % images.length;
-        return images[index];
-      }
-    }
-    
-    if (title.includes('bureautique') || title.includes('office') || title.includes('excel') || title.includes('word')) {
-      const images = categoryImages['bureautique'];
-      if (images && images.length > 0) {
-        const index = courseId ? 
-          parseInt(courseId.toString().slice(-1)) % images.length : 
-          (imageIndex++) % images.length;
-        return images[index];
-      }
-    }
-    
-    if (title.includes('digital') || title.includes('numérique') || title.includes('informatique')) {
-      const images = categoryImages['digital'];
-      if (images && images.length > 0) {
-        const index = courseId ? 
-          parseInt(courseId.toString().slice(-1)) % images.length : 
-          (imageIndex++) % images.length;
-        return images[index];
-      }
+  // Si on a trouvé une sous-catégorie avec des images
+  if (subcategory !== 'autres') {
+    const images = categoryImages[subcategory];
+    if (images && Array.isArray(images) && images.length > 0) {
+      const index = courseId ? 
+        parseInt(courseId.toString().slice(-1)) % images.length : 
+        (imageIndex++) % images.length;
+      return images[index];
     }
   }
   
