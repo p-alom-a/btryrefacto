@@ -1,8 +1,10 @@
 'use client'
 
 import React from 'react';
+import Image from 'next/image';
 import { Clock, Users, Award, BookOpen, AlertCircle, CheckCircle } from 'lucide-react';
 import { useCourseDetails, CourseDetail, FormationContinueCourse, PreventionCourse, BilanCompetenceCourse, VaeCourse } from '../hooks/useCourseDetails';
+import { getImageForCourse } from '../config/imageBank';
 
 interface CourseDetailsProps {
   category: string;
@@ -42,28 +44,44 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
 
   const renderFormationContinue = (course: FormationContinueCourse) => (
     <div className="space-y-8">
-      {/* En-tête */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">{course.titre}</h1>
-        <div className="grid md:grid-cols-3 gap-4 text-sm">
-          {course.niveau_qualification && (
-            <div className="flex items-center">
-              <Award className="w-4 h-4 text-blue-600 mr-2" />
-              <span>{course.niveau_qualification}</span>
-            </div>
-          )}
-          {course.code_rncp && (
-            <div className="flex items-center">
-              <BookOpen className="w-4 h-4 text-blue-600 mr-2" />
-              <span>Code RNCP: {course.code_rncp}</span>
-            </div>
-          )}
-          {course.modalite && (
-            <div className="flex items-center">
-              <Users className="w-4 h-4 text-blue-600 mr-2" />
-              <span>{course.modalite}</span>
-            </div>
-          )}
+      {/* En-tête avec image */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        {/* Image header */}
+        <div className="relative h-64 w-full">
+          <Image
+            src={getImageForCourse(category, course.titre, course.id.toString())}
+            alt={course.titre}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+          <div className="absolute bottom-6 left-8 right-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">{course.titre}</h1>
+          </div>
+        </div>
+        
+        {/* Informations */}
+        <div className="p-8">
+          <div className="grid md:grid-cols-3 gap-4 text-sm">
+            {course.niveau_qualification && (
+              <div className="flex items-center">
+                <Award className="w-4 h-4 text-blue-600 mr-2" />
+                <span>{course.niveau_qualification}</span>
+              </div>
+            )}
+            {course.code_rncp && (
+              <div className="flex items-center">
+                <BookOpen className="w-4 h-4 text-blue-600 mr-2" />
+                <span>Code RNCP: {course.code_rncp}</span>
+              </div>
+            )}
+            {course.modalite && (
+              <div className="flex items-center">
+                <Users className="w-4 h-4 text-blue-600 mr-2" />
+                <span>{course.modalite}</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -189,37 +207,53 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
 
   const renderPrevention = (course: PreventionCourse) => (
     <div className="space-y-8">
-      {/* En-tête */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">{course.titre}</h1>
-        <div className="grid md:grid-cols-3 gap-4 text-sm">
-          {course.code_formation && (
-            <div className="flex items-center">
-              <BookOpen className="w-4 h-4 text-blue-600 mr-2" />
-              <span>Code: {course.code_formation}</span>
-            </div>
-          )}
-          {course.duree_jours && (
-            <div className="flex items-center">
-              <Clock className="w-4 h-4 text-blue-600 mr-2" />
-              <span>{course.duree_jours} jour{course.duree_jours > 1 ? 's' : ''}</span>
-            </div>
-          )}
-          {(course.nombre_stagiaires_min || course.nombre_stagiaires_max) && (
-            <div className="flex items-center">
-              <Users className="w-4 h-4 text-blue-600 mr-2" />
-              <span>
-                {course.nombre_stagiaires_min && course.nombre_stagiaires_max 
-                  ? `${course.nombre_stagiaires_min}-${course.nombre_stagiaires_max} stagiaires`
-                  : course.nombre_stagiaires_min 
-                    ? `Min. ${course.nombre_stagiaires_min} stagiaires`
-                    : course.nombre_stagiaires_max 
-                      ? `Max. ${course.nombre_stagiaires_max} stagiaires`
-                      : 'Non spécifié'
-                }
-              </span>
-            </div>
-          )}
+      {/* En-tête avec image */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        {/* Image header */}
+        <div className="relative h-64 w-full">
+          <Image
+            src={getImageForCourse(category, course.titre, course.id.toString())}
+            alt={course.titre}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+          <div className="absolute bottom-6 left-8 right-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">{course.titre}</h1>
+          </div>
+        </div>
+        
+        {/* Informations */}
+        <div className="p-8">
+          <div className="grid md:grid-cols-3 gap-4 text-sm">
+            {course.code_formation && (
+              <div className="flex items-center">
+                <BookOpen className="w-4 h-4 text-blue-600 mr-2" />
+                <span>Code: {course.code_formation}</span>
+              </div>
+            )}
+            {course.duree_jours && (
+              <div className="flex items-center">
+                <Clock className="w-4 h-4 text-blue-600 mr-2" />
+                <span>{course.duree_jours} jour{course.duree_jours > 1 ? 's' : ''}</span>
+              </div>
+            )}
+            {(course.nombre_stagiaires_min || course.nombre_stagiaires_max) && (
+              <div className="flex items-center">
+                <Users className="w-4 h-4 text-blue-600 mr-2" />
+                <span>
+                  {course.nombre_stagiaires_min && course.nombre_stagiaires_max 
+                    ? `${course.nombre_stagiaires_min}-${course.nombre_stagiaires_max} stagiaires`
+                    : course.nombre_stagiaires_min 
+                      ? `Min. ${course.nombre_stagiaires_min} stagiaires`
+                      : course.nombre_stagiaires_max 
+                        ? `Max. ${course.nombre_stagiaires_max} stagiaires`
+                        : 'Non spécifié'
+                  }
+                </span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -272,10 +306,25 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
 
   const renderBilanCompetence = (course: BilanCompetenceCourse) => (
     <div className="space-y-8">
-      {/* En-tête */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">{course.titre}</h1>
-        <div className="grid md:grid-cols-2 gap-4 text-sm">
+      {/* En-tête avec image */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        {/* Image header */}
+        <div className="relative h-64 w-full">
+          <Image
+            src={getImageForCourse(category, course.titre, course.id.toString())}
+            alt={course.titre}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+          <div className="absolute bottom-6 left-8 right-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">{course.titre}</h1>
+          </div>
+        </div>
+        
+        {/* Informations */}
+        <div className="p-8">
+          <div className="grid md:grid-cols-2 gap-4 text-sm">
           {course.duree_heures && (
             <div className="flex items-center">
               <Clock className="w-4 h-4 text-blue-600 mr-2" />
@@ -288,6 +337,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
               <span>{course.effectifs}</span>
             </div>
           )}
+          </div>
         </div>
       </div>
 
@@ -351,10 +401,25 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
 
   const renderVae = (course: VaeCourse) => (
     <div className="space-y-8">
-      {/* En-tête */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">{course.titre}</h1>
-        <div className="grid md:grid-cols-3 gap-4 text-sm">
+      {/* En-tête avec image */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        {/* Image header */}
+        <div className="relative h-64 w-full">
+          <Image
+            src={getImageForCourse(category, course.titre, course.id.toString())}
+            alt={course.titre}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+          <div className="absolute bottom-6 left-8 right-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">{course.titre}</h1>
+          </div>
+        </div>
+        
+        {/* Informations */}
+        <div className="p-8">
+          <div className="grid md:grid-cols-3 gap-4 text-sm">
           {course.duree_totale_heures && (
             <div className="flex items-center">
               <Clock className="w-4 h-4 text-blue-600 mr-2" />
@@ -373,6 +438,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
               <span>{course.types_diplomes}</span>
             </div>
           )}
+          </div>
         </div>
       </div>
 
