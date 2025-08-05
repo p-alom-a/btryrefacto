@@ -17,7 +17,7 @@ export default function CategoryPage() {
       case 'prevention-risques':
         return 'Prévention des risques et formations spécifiques';
       case 'bilan-competences':
-        return 'Bilan de compétences';
+        return 'Bilan de compétences & VAE';
       case 'vae':
         return 'VAE';
       case 'formation-continue':
@@ -40,10 +40,10 @@ export default function CategoryPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
+      <div className="max-w-7xl mx-auto px-4 pt-14 pb-12">
 
-        {/* Onglets de navigation avec bouton retour - Style Apple discret */}
-        <div className="flex items-center justify-between mt-4 mb-12">
+        {/* Onglets de navigation avec bouton retour - Style Apple discret - Caché sur mobile */}
+        <div className="hidden md:flex items-center justify-between mt-4 mb-12 md:mb-20">
           <div className="flex items-center space-x-4">
             {/* Bouton retour */}
             <Link 
