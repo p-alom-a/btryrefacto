@@ -1,9 +1,16 @@
 // Configuration des images pour les formations
-export interface ImageBank {
-  [category: string]: {
-    [subcategory: string]: string[] | string;
-    default: string;
+export interface CategoryConfig {
+  default: string;
+  'hero-image': string;
+  colors: {
+    primary: string;
+    secondary: string;
   };
+  [subcategory: string]: string[] | string | { primary: string; secondary: string };
+}
+
+export interface ImageBank {
+  [category: string]: CategoryConfig;
 }
 
 export const imageBank: ImageBank = {
@@ -17,15 +24,20 @@ export const imageBank: ImageBank = {
       '/images/formation/prevention/habilitation-electrique/habilitation-6.jpg',
     ],
     'securite-incendie': [
-      // À remplir après upload des images
-      // '/images/formation/prevention/securite-incendie/incendie-1.jpg',
-      // '/images/formation/prevention/securite-incendie/incendie-2.jpg',
+      '/images/formation/prevention/securite-incendie/securite-1.png',
+      '/images/formation/prevention/securite-incendie/securite-2.png',
+      '/images/formation/prevention/securite-incendie/securite-3.png',
     ],
     'sst': [
       '/images/formation/prevention/sst/sst-1.jpg',
       '/images/formation/prevention/sst/sst-2.png',
       '/images/formation/prevention/sst/sst-3.jpg',
     ],
+    'hero-image': '/images/picto-categorie/preventionrisques.png',
+    colors: {
+      primary: '#E0484A',
+      secondary: '#F2B8B9'
+    },
     default: '/images/formation/hero-preventionrisques.png' // Image actuelle en fallback
   },
   'bilan-competences': {
@@ -37,6 +49,11 @@ export const imageBank: ImageBank = {
       // À remplir après upload des images
       // '/images/formation/bilan-competences/vae-1.jpg',
     ],
+    'hero-image': '/images/picto-categorie/bilanC_Vae.png',
+    colors: {
+      primary: '#918ADD',
+      secondary: '#C9B8F0'
+    },
     default: '/images/formation/hero-bilancompet.png' // Image actuelle en fallback
   },
   'formation-continue': {
@@ -52,6 +69,11 @@ export const imageBank: ImageBank = {
       // À remplir après upload des images
       // '/images/formation/formation-continue/digital-1.jpg',
     ],
+    'hero-image': '/images/picto-categorie/formationContinue.png',
+    colors: {
+      primary: '#2DB9CF',
+      secondary: '#B8E6F0'
+    },
     default: '/images/formation/hero-formation%20continue.png' // Image actuelle en fallback
   }
 };
@@ -124,8 +146,15 @@ export function getImageForCourse(category: string, courseTitle: string, courseI
   return categoryImages.default;
 }
 
-// Fonction pour obtenir toutes les images d'une catégorie (pour les hero)
+// Fonction pour obtenir l'image hero d'une catégorie
 export function getCategoryHeroImage(category: string): string {
   const categoryImages = imageBank[category];
-  return categoryImages ? categoryImages.default : '/images/formation/illustration-hero.png';
+  const heroImage = categoryImages?.['hero-image'];
+  return (heroImage && typeof heroImage === 'string') ? heroImage : '/images/picto-categorie/preventionrisques.png';
+}
+
+// Fonction pour obtenir les couleurs d'une catégorie
+export function getCategoryColors(category: string): { primary: string; secondary: string } {
+  const categoryImages = imageBank[category];
+  return categoryImages?.colors || { primary: '#E0484A', secondary: '#F2B8B9' };
 }

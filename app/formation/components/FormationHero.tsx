@@ -83,6 +83,7 @@ export default function FormationHero() {
                 alt="logo btry formations"
                 width={200}
                 height={80}
+                priority
                 className="formation-logo-btry w-auto h-[8vw] max-w-full object-contain opacity-0"
               />
             </div>

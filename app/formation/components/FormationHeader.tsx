@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -10,6 +11,11 @@ interface FormationHeaderProps {
 
 export default function FormationHeader({ isScrolled = false }: FormationHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+  
+  // Détection si on est sur une page category ou course pour forcer le burger
+  const isCategoryOrCoursePage = pathname?.includes('/formation/') && !pathname?.match(/^\/formation\/?$/)
+  
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -37,18 +43,18 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
             alt="btry logo"
             width={120}
             height={60}
-            className="w-auto h-7 max-w-full object-contain md:h-8 lg:h-12"
+            className="w-auto h-6 max-w-full object-contain md:h-7 lg:h-10"
           />
         </Link>
       </div>
 
-      {/* Navigation Desktop */}
-      <nav className="flex items-center" style={{ gap: '3em' }}>
-        <ul className="flex flex-row text-black list-none m-0 p-0 font-heading text-[17px] font-bold max-md:hidden" style={{ gap: '3em' }}>
+      {/* Navigation Desktop - Cachée sur les pages category/course */}
+      <nav className={`flex items-center ${isCategoryOrCoursePage ? 'hidden' : 'max-md:hidden'}`} style={{ gap: '3em' }}>
+        <ul className="flex flex-row text-black list-none m-0 p-0 font-heading text-[17px] font-bold" style={{ gap: '3em' }}>
           <li style={{ marginRight: '20px' }}>
             <a 
               href="#about" 
-              className="text-black no-underline hover:font-bold transition-all duration-200"
+              className="text-black no-underline hover:font-bold transition-all duration-200 text-sm"
             >
               À propos
             </a>
@@ -57,7 +63,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
           <li className="relative group" style={{ marginRight: '20px' }}>
             <a 
               href="#formations" 
-              className="text-black no-underline hover:font-bold transition-all duration-200"
+              className="text-black no-underline hover:font-bold transition-all duration-200 text-sm"
             >
               Nos formations
             </a>
@@ -90,7 +96,7 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
           <li className="max-md:block hidden" style={{ marginRight: '20px' }}>
             <a 
               href="#contact" 
-              className="text-black no-underline hover:font-bold transition-all duration-200"
+              className="text-black no-underline hover:font-bold transition-all duration-200 text-sm"
             >
               Contact
             </a>
@@ -100,15 +106,15 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
         {/* Contact Button Desktop */}
         <a 
           href="#contact"
-          className="cursor-pointer bg-[#002768] border-none rounded-[13px] px-6 py-[10px] text-white font-bold text-[17px] no-underline font-heading hover:bg-[#001a52] transition-colors duration-200 max-md:hidden inline-block"
+          className="cursor-pointer bg-[#002768] border-none rounded-[13px] px-4 py-2 text-white font-medium text-sm no-underline font-heading hover:bg-[#001a52] transition-colors duration-200 max-md:hidden inline-block"
         >
           Contact
         </a>
       </nav>
 
-      {/* Burger Menu Mobile */}
+      {/* Burger Menu - Visible sur mobile OU sur pages category/course */}
       <div 
-        className={`hidden flex-col cursor-pointer gap-1 max-md:flex ${isMenuOpen ? 'open' : ''}`}
+        className={`${isCategoryOrCoursePage ? 'flex' : 'hidden max-md:flex'} flex-col cursor-pointer gap-1 ${isMenuOpen ? 'open' : ''}`}
         onClick={toggleMenu}
       >
         <span className="w-6 h-[3px] bg-[#002768] transition-all duration-300"></span>
@@ -116,9 +122,9 @@ export default function FormationHeader({ isScrolled = false }: FormationHeaderP
         <span className="w-6 h-[3px] bg-[#002768] transition-all duration-300"></span>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Visible quand ouvert */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000] md:hidden">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[10000]">
           <div className="fixed top-0 right-0 w-80 h-full bg-white shadow-xl">
             <div className="flex flex-col h-full">
               {/* Header du menu */}

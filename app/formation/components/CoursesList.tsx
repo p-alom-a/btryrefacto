@@ -191,6 +191,7 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
               src={getImageForCourse(category, course.titre, course.id.toString())}
               alt={course.titre}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover"
             />
           </div>
