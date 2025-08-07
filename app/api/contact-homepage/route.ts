@@ -9,6 +9,7 @@ interface HomepageContactData {
   phone: string;
   service: string;
   message: string;
+  etreRappele: boolean;
 }
 
 export async function POST(request: NextRequest) {

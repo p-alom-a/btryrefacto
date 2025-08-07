@@ -75,7 +75,7 @@ export default function Home() {
                     />
                   </div>
                   <p className="text-gray-600 leading-relaxed font-light text-xs sm:text-sm mb-4 max-w-sm mx-auto sm:mx-0">
-                    btry solution est un bureau d'études spécialisé dans la sécurité incendie, l'exploitation et l'optimisation des bâtiments.
+                    Bureau d'études spécialisé dans la sécurité incendie, l'exploitation et l'optimisation des bâtiments.
                   </p>
                   <Link
                     href="/solution"
@@ -111,7 +111,7 @@ export default function Home() {
                     />
                   </div>
                   <p className="text-gray-600 leading-relaxed font-light text-xs sm:text-sm mb-4 max-w-sm mx-auto sm:mx-0">
-                    Programmes de formation professionnelle et développement des compétences métier.
+                    Organisme de formations professionnelles et développement des compétences métier.
                   </p>
                   <Link
                     href="/formation"

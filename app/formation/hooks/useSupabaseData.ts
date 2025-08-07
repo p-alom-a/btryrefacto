@@ -234,22 +234,122 @@ export const useSupabaseData = (category: string, courseId?: string) => {
             break;
 
           case 'bilan-competences':
-            selectFields = `
-              id, titre, code_formation, objectifs, public_concerne, prerequis,
-              qualification_intervenants, duree_heures, moyens_pedagogiques,
-              duree, effectifs, phase_preliminaire, phase_investigation,
-              phase_conclusion, suivi_6_mois, modalites_evaluation,
-              materiel_necessaire, delais_acces, accessibilite_handicap,
-              taux_reussite, taux_satisfaction, tarif, pdf_path, created_at, updated_at
-            `;
-            query = supabase
-              .from('bilan_competence_courses')
-              .select(selectFields);
-            
+            // Regrouper les cours de bilan de compétences ET VAE
             if (isDetailMode) {
-              query = query.eq('id', parseInt(courseId)).single();
+              // En mode détail, essayer d'abord bilan_competence_courses puis vae_courses
+              const id = parseInt(courseId);
+              
+              const bilanSelectFields = `
+                id, titre, code_formation, objectifs, public_concerne, prerequis,
+                qualification_intervenants, duree_heures, moyens_pedagogiques,
+                duree, effectifs, phase_preliminaire, phase_investigation,
+                phase_conclusion, suivi_6_mois, modalites_evaluation,
+                materiel_necessaire, delais_acces, accessibilite_handicap,
+                taux_reussite, taux_satisfaction, tarif, pdf_path, created_at, updated_at
+              `;
+              
+              try {
+                const { data: bilanData, error: bilanError } = await supabase
+                  .from('bilan_competence_courses')
+                  .select(bilanSelectFields)
+                  .eq('id', id)
+                  .single();
+
+                if (!bilanError && bilanData) {
+                  // Cours trouvé dans bilan_competence_courses, utiliser le flux normal
+                  query = supabase
+                    .from('bilan_competence_courses')
+                    .select(bilanSelectFields)
+                    .eq('id', id)
+                    .single();
+                  break;
+                }
+              } catch (err) {
+                // Pas trouvé dans bilan_competence_courses, essayer vae_courses
+              }
+
+              // Si pas trouvé dans bilan_competence_courses, essayer vae_courses
+              const vaeSelectFields = `
+                id, titre, code_formation, types_diplomes, diplomes_specifiques,
+                format_intra, format_inter, format_individuel, format_groupe,
+                modalites_presentiel, modalites_distance, modalites_mixte,
+                numero_habilitation, code_cpf, code_rncp, duree_totale_heures,
+                public_concerne, objectif_1_description, objectif_2_description,
+                objectif_3_description, objectif_4_description, objectif_5_description,
+                objectif_6_description, objectif_7_description, objectif_8_description,
+                delais_acces, financement_cpf, financement_france_travail,
+                financement_france_vae, intervenant_nom, consultant_nom,
+                consultant_email, consultant_telephone, tarif, tarif_type,
+                taux_reussite, taux_satisfaction, pdf_path, created_at, updated_at
+              `;
+              
+              query = supabase
+                .from('vae_courses')
+                .select(vaeSelectFields)
+                .eq('id', id)
+                .single();
+                
             } else {
-              query = query.order('titre');
+              // En mode liste, récupérer les deux tables et les combiner
+              try {
+                const bilanSelectFields = `
+                  id, titre, code_formation, objectifs, public_concerne, prerequis,
+                  qualification_intervenants, duree_heures, moyens_pedagogiques,
+                  duree, effectifs, phase_preliminaire, phase_investigation,
+                  phase_conclusion, suivi_6_mois, modalites_evaluation,
+                  materiel_necessaire, delais_acces, accessibilite_handicap,
+                  taux_reussite, taux_satisfaction, tarif, pdf_path, created_at, updated_at
+                `;
+
+                const vaeSelectFields = `
+                  id, titre, code_formation, types_diplomes, diplomes_specifiques,
+                  format_intra, format_inter, format_individuel, format_groupe,
+                  modalites_presentiel, modalites_distance, modalites_mixte,
+                  numero_habilitation, code_cpf, code_rncp, duree_totale_heures,
+                  public_concerne, objectif_1_description, objectif_2_description,
+                  objectif_3_description, objectif_4_description, objectif_5_description,
+                  objectif_6_description, objectif_7_description, objectif_8_description,
+                  delais_acces, financement_cpf, financement_france_travail,
+                  financement_france_vae, intervenant_nom, consultant_nom,
+                  consultant_email, consultant_telephone, tarif, tarif_type,
+                  taux_reussite, taux_satisfaction, pdf_path, created_at, updated_at
+                `;
+
+                // Récupérer les cours de bilan de compétences
+                const { data: bilanData, error: bilanError } = await supabase
+                  .from('bilan_competence_courses')
+                  .select(bilanSelectFields)
+                  .order('titre');
+
+                // Récupérer les cours VAE
+                const { data: vaeData, error: vaeError } = await supabase
+                  .from('vae_courses')
+                  .select(vaeSelectFields)
+                  .order('titre');
+
+                if (bilanError) {
+                  console.error('Erreur bilan_competence_courses:', bilanError);
+                }
+                if (vaeError) {
+                  console.error('Erreur vae_courses:', vaeError);
+                }
+
+                // Même si une des deux requêtes échoue, on combine ce qu'on peut récupérer
+                const combinedCourses = [
+                  ...(bilanData || []),
+                  ...(vaeData || [])
+                ].sort((a, b) => a.titre.localeCompare(b.titre));
+
+                console.log('Bilan courses:', bilanData?.length || 0);
+                console.log('VAE courses:', vaeData?.length || 0);
+                console.log('Combined courses:', combinedCourses.length);
+
+                setCourses(combinedCourses as unknown as Course[]);
+                return; // Sortir de fetchData ici car on a terminé
+              } catch (err) {
+                console.error('Erreur lors de la combinaison:', err);
+                throw err;
+              }
             }
             break;
 

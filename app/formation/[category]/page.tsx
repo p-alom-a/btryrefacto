@@ -10,7 +10,12 @@ import { getCategoryHeroImage, getCategoryColors } from '../config/imageBank';
 
 export default function CategoryPage() {
   const params = useParams();
-  const category = params.category as string;
+  let category = params.category as string;
+  
+  // Rediriger VAE vers bilan-competences pour regrouper les deux
+  if (category === 'vae') {
+    category = 'bilan-competences';
+  }
 
   const getCategoryTitle = (category: string) => {
     switch (category) {

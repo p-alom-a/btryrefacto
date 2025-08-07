@@ -21,6 +21,7 @@ interface FormData {
   phone: string
   service: string
   message: string
+  etreRappele: boolean
 }
 
 // Composant Modal propre avec Portal
@@ -137,7 +138,7 @@ function ContactModal({
               marginBottom: '1rem',
               margin: '0 0 1rem 0'
             }}>
-              Être rappelé
+              Nous contacter
             </h2>
             <p className="contact-modal-subtitle" style={{ 
               fontSize: '1.125rem', 
@@ -145,7 +146,7 @@ function ContactModal({
               fontWeight: '300',
               margin: '0'
             }}>
-              Indiquez vos coordonnées, nous vous rappellerons dans les plus brefs délais.
+              Indiquez vos coordonnées et vos préférences de contact.
             </p>
           </div>
           
@@ -380,6 +381,34 @@ function ContactModal({
                 <option value="autre">Autre</option>
               </select>
               {errors.service && <span style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '0.25rem', display: 'block' }}>{errors.service.message}</span>}
+            </div>
+
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                <input
+                  type="checkbox"
+                  id="etreRappele"
+                  {...register('etreRappele')}
+                  style={{
+                    width: '1.25rem',
+                    height: '1.25rem',
+                    accentColor: '#3b82f6',
+                    cursor: 'pointer'
+                  }}
+                />
+                <label 
+                  htmlFor="etreRappele"
+                  style={{ 
+                    fontSize: '0.875rem', 
+                    fontWeight: '500', 
+                    color: '#374151',
+                    cursor: 'pointer',
+                    userSelect: 'none'
+                  }}
+                >
+                  Être rappelé(e) par téléphone
+                </label>
+              </div>
             </div>
 
             <div>
@@ -632,7 +661,6 @@ export default function Contact() {
           <div className="left-contact-container">
             <h4 className="contact-heading">Besoin d'expertise pour sécuriser et optimiser vos bâtiments ?</h4>
             <div className="btn-formulaire-contact">
-              <a href="mailto:contact@btry.fr" className="btn-mail">Nous écrire</a>
               <button 
                 className="btn-appel" 
                 onClick={() => {
@@ -641,7 +669,7 @@ export default function Contact() {
                 }}
                 style={{ pointerEvents: 'auto', cursor: 'pointer' }}
               >
-                Être rappelé
+                Nous contacter
               </button>
             </div>
           </div>

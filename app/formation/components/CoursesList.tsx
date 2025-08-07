@@ -179,10 +179,20 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-          {filteredCourses.map((course) => (
+          {filteredCourses.map((course) => {
+            // Déterminer la sous-catégorie du cours pour construire la bonne URL
+            const subcategory = getCourseSubcategory(category, course.titre);
+            let linkCategory = category;
+            
+            // Si c'est un cours VAE mais qu'on est sur bilan-competences, garder bilan-competences
+            if (category === 'bilan-competences' && subcategory === 'vae') {
+              linkCategory = 'bilan-competences';
+            }
+            
+            return (
         <Link
           key={course.id}
-          href={`/formation/${category}/${course.id}`}
+          href={`/formation/${linkCategory}/${course.id}`}
           className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-blue-200 hover:scale-[1.02] block max-w-none"
         >
           {/* Image du cours */}
@@ -222,7 +232,8 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
             </div>
           </div>
         </Link>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

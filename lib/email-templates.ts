@@ -17,6 +17,7 @@ interface ContactHomepageData {
   phone: string;
   service: string;
   message: string;
+  etreRappele: boolean;
 }
 
 export function createFormationEmailTemplate(data: ContactFormationData): string {
@@ -81,7 +82,7 @@ export function createFormationEmailTemplate(data: ContactFormationData): string
 }
 
 export function createHomepageEmailTemplate(data: ContactHomepageData): string {
-  const { name, companyName, email, phone, service, message } = data;
+  const { name, companyName, email, phone, service, message, etreRappele } = data;
 
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -118,6 +119,13 @@ export function createHomepageEmailTemplate(data: ContactHomepageData): string {
           <div style="margin-bottom: 20px;">
             <strong style="color: #374151;">Service souhaité :</strong><br>
             <span style="color: #6b7280; background-color: #dbeafe; padding: 4px 8px; border-radius: 4px; display: inline-block;">${service}</span>
+          </div>
+          
+          <div style="margin-bottom: 20px;">
+            <strong style="color: #374151;">Préférence de contact :</strong><br>
+            <span style="color: #6b7280; background-color: ${etreRappele ? '#dcfce7' : '#fee2e2'}; padding: 4px 8px; border-radius: 4px; display: inline-block;">
+              ${etreRappele ? '📞 Souhaite être rappelé(e) par téléphone' : '📧 Contact par email uniquement'}
+            </span>
           </div>
         </div>
         
