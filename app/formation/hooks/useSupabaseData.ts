@@ -15,6 +15,7 @@ export type Course = {
   modalites_evaluation?: string | string[];
   delai_acces?: string;
   delais_acces?: string;
+  pdf_path?: string;
   created_at?: string;
   updated_at?: string;
 
@@ -200,7 +201,7 @@ export const useSupabaseData = (category: string, courseId?: string) => {
               blocs, missions, moyens_pedagogiques, outils_numeriques, modalites_evaluation,
               modalite_validation, modalites_acces, delai_acces, accessibilite_handicap,
               taux_reussite, taux_satisfaction, taux_insertion, public, prerequis,
-              accompagnement, remediation, created_at, updated_at
+              accompagnement, remediation, pdf_path, created_at, updated_at
             `;
             query = supabase
               .from('formation_continue_courses')
@@ -219,7 +220,7 @@ export const useSupabaseData = (category: string, courseId?: string) => {
               niveau_prerequis, objectifs_pedagogiques, animation, pedagogie,
               modalites_evaluation, documents_delivres, nombre_stagiaires_min,
               nombre_stagiaires_max, programme_theorique, programme_pratique,
-              taux_reussite, taux_satisfaction, created_at, updated_at
+              taux_reussite, taux_satisfaction, pdf_path, created_at, updated_at
             `;
             query = supabase
               .from('prevention_courses')
@@ -239,7 +240,7 @@ export const useSupabaseData = (category: string, courseId?: string) => {
               duree, effectifs, phase_preliminaire, phase_investigation,
               phase_conclusion, suivi_6_mois, modalites_evaluation,
               materiel_necessaire, delais_acces, accessibilite_handicap,
-              taux_reussite, taux_satisfaction, tarif, created_at, updated_at
+              taux_reussite, taux_satisfaction, tarif, pdf_path, created_at, updated_at
             `;
             query = supabase
               .from('bilan_competence_courses')
@@ -264,7 +265,7 @@ export const useSupabaseData = (category: string, courseId?: string) => {
               delais_acces, financement_cpf, financement_france_travail,
               financement_france_vae, intervenant_nom, consultant_nom,
               consultant_email, consultant_telephone, tarif, tarif_type,
-              taux_reussite, taux_satisfaction, created_at, updated_at
+              taux_reussite, taux_satisfaction, pdf_path, created_at, updated_at
             `;
             query = supabase
               .from('vae_courses')

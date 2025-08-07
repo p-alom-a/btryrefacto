@@ -1,11 +1,12 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Clock, Users, Award, BookOpen, AlertCircle } from 'lucide-react';
+import { Clock, Users, Award, BookOpen, AlertCircle, Download } from 'lucide-react';
 import { useSupabaseData, FormationContinueCourse, PreventionCourse, BilanCompetenceCourse, VaeCourse } from '../hooks/useSupabaseData';
 import { getImageForCourse } from '../config/imageBank';
+import { downloadCoursePdf } from '../utils/pdfDownload';
 
 interface CourseDetailsProps {
   category: string;
@@ -14,6 +15,7 @@ interface CourseDetailsProps {
 
 const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => {
   const { course, loading, error } = useSupabaseData(category, courseId);
+  const [downloadLoading, setDownloadLoading] = useState(false);
 
   if (loading) {
     return (
@@ -42,6 +44,20 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
       </div>
     );
   }
+
+  const handleDownloadPdf = async () => {
+    if (!course) return;
+    
+    setDownloadLoading(true);
+    try {
+      await downloadCoursePdf(course.pdf_path, course.titre);
+    } catch (error) {
+      console.error('Erreur lors du téléchargement:', error);
+      alert('Erreur lors du téléchargement du PDF. Veuillez réessayer ou contacter le support.');
+    } finally {
+      setDownloadLoading(false);
+    }
+  };
 
   const renderFormationContinue = (course: FormationContinueCourse) => (
     <div className="space-y-8">
@@ -592,8 +608,27 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
         <Link href="/formation#contact" className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors inline-block text-center">
           Contact
         </Link>
-        <button className="bg-gray-100 text-gray-700 px-8 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors">
-          Télécharger la fiche
+        <button 
+          onClick={handleDownloadPdf}
+          disabled={downloadLoading || !course.pdf_path}
+          className={`px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center space-x-2 ${
+            course.pdf_path 
+              ? 'bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          }`}
+          title={!course.pdf_path ? 'Aucun PDF disponible pour ce cours' : ''}
+        >
+          {downloadLoading ? (
+            <>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600"></div>
+              <span>Téléchargement...</span>
+            </>
+          ) : (
+            <>
+              <Download className="w-4 h-4" />
+              <span>Télécharger la fiche</span>
+            </>
+          )}
         </button>
       </div>
     </div>
