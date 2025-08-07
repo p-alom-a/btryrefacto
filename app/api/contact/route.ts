@@ -10,6 +10,7 @@ interface ContactFormData {
   company: string;
   formation: string;
   message: string;
+  etreRappele: boolean;
 }
 
 export async function POST(request: NextRequest) {

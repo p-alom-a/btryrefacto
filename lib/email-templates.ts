@@ -8,6 +8,7 @@ interface ContactFormationData {
   company: string;
   formation: string;
   message: string;
+  etreRappele: boolean;
 }
 
 interface ContactHomepageData {
@@ -21,7 +22,7 @@ interface ContactHomepageData {
 }
 
 export function createFormationEmailTemplate(data: ContactFormationData): string {
-  const { firstName, lastName, email, phone, company, formation, message } = data;
+  const { firstName, lastName, email, phone, company, formation, message, etreRappele } = data;
 
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -63,6 +64,13 @@ export function createFormationEmailTemplate(data: ContactFormationData): string
           <div style="margin-bottom: 20px;">
             <strong style="color: #374151;">Formation d'intérêt :</strong><br>
             <span style="color: #6b7280; background-color: #ddd6fe; padding: 4px 8px; border-radius: 4px; display: inline-block;">${formation || 'Non renseigné'}</span>
+          </div>
+          
+          <div style="margin-bottom: 20px;">
+            <strong style="color: #374151;">Préférence de contact :</strong><br>
+            <span style="color: #6b7280; background-color: ${etreRappele ? '#dcfce7' : '#fee2e2'}; padding: 4px 8px; border-radius: 4px; display: inline-block;">
+              ${etreRappele ? '📞 Souhaite être rappelé(e) par téléphone' : '📧 Contact par email uniquement'}
+            </span>
           </div>
         </div>
         
