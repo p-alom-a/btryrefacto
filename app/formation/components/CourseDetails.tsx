@@ -66,7 +66,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
         {/* Image header */}
         <div className="relative h-64 w-full">
           <Image
-            src={getImageForCourse(category, course.titre, course.id.toString())}
+            src={getImageForCourse(category, course.titre, course.id.toString(), course.code_formation)}
             alt={course.titre}
             fill
             sizes="100vw"
@@ -236,7 +236,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
         {/* Image header */}
         <div className="relative h-64 w-full">
           <Image
-            src={getImageForCourse(category, course.titre, course.id.toString())}
+            src={getImageForCourse(category, course.titre, course.id.toString(), course.code_formation)}
             alt={course.titre}
             fill
             sizes="100vw"
@@ -361,7 +361,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
         {/* Image header */}
         <div className="relative h-64 w-full">
           <Image
-            src={getImageForCourse(category, course.titre, course.id.toString())}
+            src={getImageForCourse(category, course.titre, course.id.toString(), course.code_formation)}
             alt={course.titre}
             fill
             sizes="100vw"
@@ -482,7 +482,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => 
         {/* Image header */}
         <div className="relative h-64 w-full">
           <Image
-            src={getImageForCourse(category, course.titre, course.id.toString())}
+            src={getImageForCourse(category, course.titre, course.id.toString(), course.code_formation)}
             alt={course.titre}
             fill
             sizes="100vw"

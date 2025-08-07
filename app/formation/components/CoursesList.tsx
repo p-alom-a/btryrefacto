@@ -22,7 +22,7 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
     
     // Calculer les compteurs en une seule passe
     courses.forEach(course => {
-      const subcategory = getCourseSubcategory(category, course.titre);
+      const subcategory = getCourseSubcategory(category, course.titre, course.code_formation);
       subcategoryCounts.set(subcategory, (subcategoryCounts.get(subcategory) || 0) + 1);
     });
 
@@ -57,7 +57,7 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
     
     return courses.filter(course => {
       if (!courseSubcategories.has(course.id)) {
-        courseSubcategories.set(course.id, getCourseSubcategory(category, course.titre));
+        courseSubcategories.set(course.id, getCourseSubcategory(category, course.titre, course.code_formation));
       }
       return courseSubcategories.get(course.id) === selectedFilter;
     });
@@ -181,7 +181,7 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {filteredCourses.map((course) => {
             // Déterminer la sous-catégorie du cours pour construire la bonne URL
-            const subcategory = getCourseSubcategory(category, course.titre);
+            const subcategory = getCourseSubcategory(category, course.titre, course.code_formation);
             let linkCategory = category;
             
             // Si c'est un cours VAE mais qu'on est sur bilan-competences, garder bilan-competences
@@ -198,7 +198,7 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
           {/* Image du cours */}
           <div className="relative h-56 sm:h-64 md:h-56 lg:h-60 w-full">
             <Image
-              src={getImageForCourse(category, course.titre, course.id.toString())}
+              src={getImageForCourse(category, course.titre, course.id.toString(), course.code_formation)}
               alt={course.titre}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

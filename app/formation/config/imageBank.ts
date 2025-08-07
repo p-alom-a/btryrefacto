@@ -73,7 +73,21 @@ export const imageBank: ImageBank = {
 let imageIndex = 0;
 
 // Fonction utilitaire pour déterminer la sous-catégorie d'un cours
-export function getCourseSubcategory(category: string, courseTitle: string): string {
+export function getCourseSubcategory(category: string, courseTitle: string, courseCode?: string): string {
+  
+  if (category === 'prevention-risques' && courseCode) {
+    if (courseCode.startsWith('FDC1')) {
+      return 'habilitation-electrique';
+    }
+    if (courseCode.startsWith('FDC2')) {
+      return 'securite-incendie';
+    }
+    if (courseCode.startsWith('FDC3')) {
+      return 'sst';
+    }
+  }
+  
+  // Fallback avec mots-clés pour les autres catégories ou si pas de code
   const title = courseTitle.toLowerCase();
   
   if (category === 'prevention-risques') {
@@ -113,14 +127,14 @@ export function getCourseSubcategory(category: string, courseTitle: string): str
 }
 
 // Fonction pour sélectionner une image basée sur le titre du cours
-export function getImageForCourse(category: string, courseTitle: string, courseId?: string): string {
+export function getImageForCourse(category: string, courseTitle: string, courseId?: string, courseCode?: string): string {
   const categoryImages = imageBank[category];
   
   if (!categoryImages) {
     return '/images/formation/illustration-hero.png'; // Fallback général
   }
 
-  const subcategory = getCourseSubcategory(category, courseTitle);
+  const subcategory = getCourseSubcategory(category, courseTitle, courseCode);
   
   // Si on a trouvé une sous-catégorie avec des images
   if (subcategory !== 'autres') {
