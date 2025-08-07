@@ -16,22 +16,13 @@ export interface ImageBank {
 export const imageBank: ImageBank = {
   'prevention-risques': {
     'habilitation-electrique': [
-      '/images/formation/prevention/habilitation-electrique/habilitation-1.png',
-      '/images/formation/prevention/habilitation-electrique/habilitation-2.png',
-      '/images/formation/prevention/habilitation-electrique/habilitation-3.png',
-      '/images/formation/prevention/habilitation-electrique/habilitation-4.png',
-      '/images/formation/prevention/habilitation-electrique/habilitation-5.jpg',
       '/images/formation/prevention/habilitation-electrique/habilitation-6.jpg',
     ],
     'securite-incendie': [
-      '/images/formation/prevention/securite-incendie/securite-1.png',
       '/images/formation/prevention/securite-incendie/securite-2.png',
-      '/images/formation/prevention/securite-incendie/securite-3.png',
     ],
     'sst': [
       '/images/formation/prevention/sst/sst-1.jpg',
-      '/images/formation/prevention/sst/sst-2.png',
-      '/images/formation/prevention/sst/sst-3.jpg',
     ],
     'hero-image': '/images/picto-categorie/preventionrisques.png',
     colors: {
