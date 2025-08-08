@@ -11,10 +11,11 @@ import { downloadCoursePdf } from '../utils/pdfDownload';
 interface CourseDetailsProps {
   category: string;
   courseId: string;
+  source?: 'bilan' | 'vae';
 }
 
-const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId }) => {
-  const { course, loading, error } = useSupabaseData(category, courseId);
+const CourseDetails: React.FC<CourseDetailsProps> = ({ category, courseId, source }) => {
+  const { course, loading, error } = useSupabaseData(category, courseId, source);
   const [downloadLoading, setDownloadLoading] = useState(false);
 
   if (loading) {

@@ -9,7 +9,18 @@ import CourseDetails from '../../components/CourseDetails';
 export default function CourseDetailPage() {
   const params = useParams();
   let category = params.category as string;
-  const id = params.id as string;
+  const rawId = params.id as string;
+  let id = rawId;
+  let source: 'bilan' | 'vae' | undefined = undefined;
+
+  // Support des IDs encodés avec la source: vae-12 ou bilan-9
+  if (rawId.includes('-')) {
+    const [prefix, numeric] = rawId.split('-');
+    if (prefix === 'vae' || prefix === 'bilan') {
+      source = prefix;
+      id = numeric;
+    }
+  }
   
   // Rediriger VAE vers bilan-competences pour regrouper les deux
   if (category === 'vae') {
@@ -46,7 +57,7 @@ export default function CourseDetailPage() {
         </div>
 
         {/* Course details */}
-        <CourseDetails category={category} courseId={id} />
+        <CourseDetails category={category} courseId={id} source={source} />
       </div>
     </div>
   );

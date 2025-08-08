@@ -180,19 +180,22 @@ const CoursesList: React.FC<CoursesListProps> = ({ category }) => {
       ) : (
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {filteredCourses.map((course) => {
-            // Déterminer la sous-catégorie du cours pour construire la bonne URL
+            // Déterminer la sous-catégorie du cours et l'identifiant d'URL
             const subcategory = getCourseSubcategory(category, course.titre, course.code_formation);
             let linkCategory = category;
             
-            // Si c'est un cours VAE mais qu'on est sur bilan-competences, garder bilan-competences
-            if (category === 'bilan-competences' && subcategory === 'vae') {
+            // Construire un ID encodant la source pour éviter les collisions (ex: vae-12, bilan-9)
+            let linkId = String(course.id);
+            if (category === 'bilan-competences') {
+              const sourcePrefix = (course as any).source || (subcategory === 'vae' ? 'vae' : 'bilan');
+              linkId = `${sourcePrefix}-${course.id}`;
               linkCategory = 'bilan-competences';
             }
             
             return (
         <Link
           key={course.id}
-          href={`/formation/${linkCategory}/${course.id}`}
+          href={`/formation/${linkCategory}/${linkId}`}
           className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-blue-200 hover:scale-[1.02] block max-w-none"
         >
           {/* Image du cours */}
